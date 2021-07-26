@@ -114,6 +114,13 @@ body {
   height: 30px;
   cursor: pointer;
   user-select: none;
+  font-size: 10pt;
+}
+#skip-back {
+  padding-right: 3px;
+}
+#skip-forward {
+  padding-left: 3px;
 }
 .now-playing__status.paused {
   font-size: 20pt;
@@ -173,26 +180,37 @@ body {
 }
 
 /** Progress **/
-.progress {
+
+.progress-container {
   margin-top: 10px;
+  display: inline-flex;
+}
+.progress {
   border: 2px solid #eee;
   height: fit-content;
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 280px;
+  margin-left: 5px;
+  margin-right: 5px;
   border-radius: 50px;
   overflow: hidden;
   padding: 2px;
   filter: drop-shadow(0 0 2px #00000044);
   backdrop-filter: blur(100px);
 }
-
+.progress-time,
+.progress-duration {
+  font-size: 8px;
+  line-height: 12px;
+  font-family: "Open Sans", sans-serif;
+  filter: drop-shadow(0 0 1px #000000aa);
+}
 .progress__bar {
   background-color: #eee;
   height: 4px;
   /*border: solid transparent 2px;*/
   border-radius: 50px;
   transition: 2s width;
+  min-width: 4px;
 }
 
 /** Background **/
@@ -204,10 +222,11 @@ body {
   background-size: cover;
   background-position: center center;
   position: absolute;
-  filter: blur(20px) opacity(0.7);
+  filter: blur(20px) opacity(0.5);
 }
 .background.no-img,
-.no-img .background {
+.no-img .background,
+.container {
   background: linear-gradient(45deg, #8c1932, #ff6437 60%) !important;
   filter: none !important;
 }
@@ -218,7 +237,8 @@ body {
   top: 0;
   left: 0;
   overflow: hidden;
-  background: white;
+  background: grey;
+  /*background: white;*/
 }
 
 .main-wrapper {
