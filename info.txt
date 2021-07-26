@@ -1,0 +1,39 @@
+https://accounts.spotify.com/authorize?response_type=code&redirect_uri=https://sander.vonk.productions/spotify-playlist/callback&client_id=fc6786adda404b36a1f67a106913dd6f
+
+//original
+https://accounts.spotify.com/en/authorize?response_type=code&redirect_uri=https:%2F%2Fsander.vonk.productions%2Fspotify-playlist%2Fcallback&client_id=fc6786adda404b36a1f67a106913dd6f
+
+//token api
+
+scopes
+user-read-recently-played
+user-read-playback-position
+user-read-playback-state
+user-modify-playback-state
+user-read-currently-playing
+playlist-read-private
+playlist-read-collaborative
+user-library-read
+
+
+//modified?
+
+user-read-recently-played user-read-playback-position user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-private playlist-read-collaborative user-library-read
+
+
+https://accounts.spotify.com/authorize?response_type=code&redirect_uri=https:%2F%2Fsander.vonk.productions%2Fspotify-playlist%2Fcallback&client_id=fc6786adda404b36a1f67a106913dd6f&scopes=user-read-recently-played user-read-playback-position user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-private playlist-read-collaborative user-library-read
+
+//url formatted
+
+https://accounts.spotify.com/authorize?response_type=code&redirect_uri=https:%2F%2Fsander.vonk.productions%2Fspotify-playlist%2Fcallback&client_id=fc6786adda404b36a1f67a106913dd6f&scopes=user-read-recently-played%20user-read-playback-position%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20playlist-read-private%20playlist-read-collaborative%20user-library-read
+
+//client ID: fc6786adda404b36a1f67a106913dd6f
+//client Secret: fa6f2e9c9b9c4da6a255679c3d4a438d
+
+
+
+
+
+
+https://accounts.spotify.com/authorize?response_type=code&redirect_uri=
+https%3A%2F%2Fsander.vonk.productions%2Fspotify-playlist%2Fcallback%3FyourURL&client_id=fc6786adda404b36a1f67a106913dd6f&scopes=user-read-recently-played%20user-read-playback-position%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20playlist-read-private%20playlist-read-collaborative%20user-library-read
