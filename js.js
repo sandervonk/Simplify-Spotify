@@ -11,6 +11,11 @@ var mainContainer = document.getElementById('js-main-container'),
 
 var spotifyPlayer = new SpotifyPlayer();
 var spotifyApi = new SpotifyWebApi();
+if (window.location.href.includes("?code=")) {
+    token = window.location.href.split["?code="][window.location.href.split["?code="].length]
+    localStorage["simplify-token"] = token
+    spotifyApi.setAccessToken(token)
+}
 
 var template = function (data) {
     return `
