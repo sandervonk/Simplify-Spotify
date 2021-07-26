@@ -15,6 +15,7 @@ if (window.location.href.includes("?code=")) {
     token = window.location.href.split["?code="][window.location.href.split["?code="].length]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
+    console.log("now with token handling!")
 }
 
 var template = function (data) {
