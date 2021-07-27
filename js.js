@@ -115,8 +115,10 @@ spotifyPlayer.on('login', user => {
 });
 loginButton.addEventListener('click', () => {
     spotifyPlayer.login();
-    window.location.href = requestURL
 });
 
 
 spotifyPlayer.init();
+
+//future ref:
+//document.body.outerHTML = document.body.outerHTML.split("</body>")[0] + `<div class=simplify-prevent-scroll><div class=simplify-spotify><div class=simplify-spotify-minimize onclick='element=document.getElementsByClassName("simplify-spotify")[0],element.className.includes(" minimized")?element.className=element.className.replace(" minimized",""):element.className+=" minimized"'>🗕︎</div><div class=container><div class="hidden login-container"id=js-login-container><button class="btn btn--login"id=js-btn-login>Login with Spotify</button></div><div class="hidden main-container"id=js-main-container></div></div></div></div>` + "</body>" + document.body.outerHTML.split("</body>")[1]
