@@ -47,13 +47,7 @@ if (window.location.href.includes("#access_token=")) {
     window.location.href = requestURL
     console.log("getting new token")
 }
-function skipBack15() {
-    spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms - 15000));
-}
-function skipForward15() {
-    spotifyApi.getMyCurrentPlaybackState().then(skip1response => spotifyApi.seek(skip1response.progress_ms + 15000));
 
-}
 var template = function (data) {
     return `
     <div class="main-wrapper">
