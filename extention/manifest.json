@@ -11,10 +11,14 @@
   },
   "content_scripts": [
     {
-      "js": ["contentscript.js"],
+      "js": [],
       "css": ["contentscript.css"],
-      "matches": ["\u003Call_urls>"]
+      "matches": ["<all_urls>"]
     }
   ],
-  "content_security_policy": "script-src 'self' https://sander.vonk.productions/* https://open.spotify.com/*; object-src 'self'"
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://sander.vonk.productions/* https://*.spotify.com/*; object-src 'self'"
 }

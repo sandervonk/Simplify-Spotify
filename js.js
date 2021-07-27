@@ -11,8 +11,8 @@ var mainContainer = document.getElementById('js-main-container'),
 
 var spotifyPlayer = new SpotifyPlayer();
 var spotifyApi = new SpotifyWebApi();
-if (window.location.href.includes("?code=")) {
-    token = window.location.href.split("?code=")[window.location.href.split("?code=").length - 1]
+if (window.location.href.includes("#access_token=")) {
+    token = window.location.href.split("#access_token=")[window.location.href.split("#access_token=").length - 1]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
     console.log("now with token handling!")
