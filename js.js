@@ -47,7 +47,13 @@ if (window.location.href.includes("#access_token=")) {
     window.location.href = requestURL
     console.log("getting new token")
 }
+function skipBack15() {
+    spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms - 15000));
+}
+function skipForward15() {
+    spotifyApi.getMyCurrentPlaybackState().then(skip1response => spotifyApi.seek(skip1response.progress_ms + 15000));
 
+}
 var template = function (data) {
     return `
     <div class="main-wrapper">
@@ -66,11 +72,11 @@ var template = function (data) {
             <div id="skip-forward" class="skip-btn" onclick="spotifyApi.skipToNext()">&#9654;</div>
         </div>
         <div class="progress-container">
-            <div class="progress-time" onclick="await spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms-15000));">${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
+            <div class="progress-time" onclick="spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms - 15000));">${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
                 <div class="progress">
                     <div class="progress__bar" style="width:${data.progress_ms * 100 / data.item.duration_ms}%"></div>
                  </div>
-            <div class="progress-duration" onclick="await spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms+15000));">${Math.floor((data.item.duration_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.item.duration_ms / 1000) % 60))}</div>
+            <div class="progress-duration" onclick="spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms + 15000));">${Math.floor((data.item.duration_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.item.duration_ms / 1000) % 60))}</div>
         </div>
         </div>
     </div>
