@@ -114,6 +114,7 @@ spotifyPlayer.on('login', user => {
 
 });
 loginButton.addEventListener('click', () => {
+    spotifyPlayer.accessToken = localStorage["simplify-token"]
     spotifyPlayer.login();
 });
 
