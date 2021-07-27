@@ -95,12 +95,6 @@ spotifyPlayer.on('login', user => {
         loginContainer.style.display = 'none';
         mainContainer.style.display = 'block';
     }
-});
-loginButton.addEventListener('click', () => {
-    spotifyPlayer.login();
-    window.location.href = requestURL
-});
-setTimeout(function () {
     document.getElementById('js-status-play-pause').addEventListener('click', () => {
         if (document.getElementById('js-status-play-pause').className.includes("paused")) {
             spotifyApi.play()
@@ -108,6 +102,11 @@ setTimeout(function () {
             spotifyApi.pause()
         }
     })
-}, 300)
+});
+loginButton.addEventListener('click', () => {
+    spotifyPlayer.login();
+    window.location.href = requestURL
+});
+
 
 spotifyPlayer.init();
