@@ -1,3 +1,15 @@
+//https://accounts.spotify.com/authorize?response_type=token&redirect_uri=https:%2F%2Fsander.vonk.productions%2Fsimplify-spotify%2Fplayer.html&client_id=fc6786adda404b36a1f67a106913dd6f&scope=user-read-recently-played", "user-read-playback-position", "user-read-playback-state", "user-modify-playback-state", "user-read-currently-playing", "playlist-read-private", "playlist-read-collaborative", "user-library-read
+//response type
+response_type = "response_type=" + "token"
+//response uri
+redirect_url = "https://sander.vonk.productions/simplify-spotify/player.html"
+redirect_uri = "redirect_uri=" + encodeURIComponent(redirect_url)
+//scope
+scopeList = ["user-read-recently-played", "user-read-playback-position", "user-read-playback-state", "user-modify-playback-state", "user-read-currently-playing", "playlist-read-private", "playlist-read-collaborative user-library-read"]
+scope = "scope=" + encodeURIComponent(scopeList.join(' '))
+client_id = "client_id=" + "fc6786adda404b36a1f67a106913dd6f"
+requestURL = "https://accounts.spotify.com/authorize?" + [response_type, redirect_uri, scope, client_id].join("&")
+
 function pad2(number) {
 
     return (number < 10 ? '0' : '') + number
@@ -7,6 +19,7 @@ function pad2(number) {
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
+    statusControl = document.getElementById('js-status-play-pause'),
     background = document.getElementById('js-background');
 
 var spotifyPlayer = new SpotifyPlayer();
@@ -16,7 +29,6 @@ if (window.location.href.includes("#access_token=")) {
     token = window.location.href.split("#access_token=")[window.location.href.split("#access_token=").length - 1].split("&")[0]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
-    console.log("now with ACTUAL token handling!")
 }
 
 var template = function (data) {
@@ -32,9 +44,9 @@ var template = function (data) {
       </div>
       <div class="now-playing__controls">
         <div class="controls-center">
-            <div id="skip-back" class="skip-btn">&#9664;</div>
-            <div class="now-playing__status ${data.is_playing ? 'playing' : 'paused'}">${data.is_playing ? '&#9612;&#9612;' : '&#9654;'}</div>
-            <div id="skip-forward" class="skip-btn">&#9654;</div>
+            <div id="skip-back" class="skip-btn" onclick="spotifyApi.skipToPrevious()">&#9664;</div>
+            <div id="js-status-play-pause" class="now-playing__status ${data.is_playing ? 'playing' : 'paused'}">${data.is_playing ? '&#9612;&#9612;' : '&#9654;'}</div>
+            <div id="skip-forward" class="skip-btn" onclick="spotifyApi.skipToNext()">&#9654;</div>
         </div>
         <div class="progress-container">
             <div class="progress-time">${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
@@ -80,9 +92,16 @@ spotifyPlayer.on('login', user => {
         mainContainer.style.display = 'block';
     }
 });
-
+document.getElementById()
 loginButton.addEventListener('click', () => {
     spotifyPlayer.login();
+    window.location.href = requestURL
 });
-
+statusControl.addEventListener('click', () => {
+    if (statusControl.className.includes("paused")) {
+        spotifyApi.play()
+    } else {
+        spotifyApi.pause()
+    }
+})
 spotifyPlayer.init();
