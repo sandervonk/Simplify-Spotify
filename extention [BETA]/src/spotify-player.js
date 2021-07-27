@@ -120,13 +120,13 @@ class SpotifyPlayer {
         url,
         'Spotify',
         'menubar=no,location=no,resizable=no,scrollbars=no,status=no, width=' +
-          width +
-          ', height=' +
-          height +
-          ', top=' +
-          top +
-          ', left=' +
-          left
+        width +
+        ', height=' +
+        height +
+        ', top=' +
+        top +
+        ', left=' +
+        left
       );
     });
   }

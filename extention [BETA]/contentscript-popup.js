@@ -45,7 +45,7 @@ chrome.storage.sync.get({ "token_date": "", "token": "" }, function (response) {
             spotifyApi = new SpotifyWebApi();
             spotifyPlayer = new SpotifyPlayer();
             initAddElement(response.token)
-        }, 200)
+        }, 0)
 
     }
 
@@ -83,16 +83,16 @@ function initAddElement(token) {
           </div>
           <div class="now-playing__controls">
             <div class="controls-center">
-                <div id="skip-back" class="skip-btn" onclick="spotifyApi.skipToPrevious()">&#9664;</div>
-                <div id="js-status-play-pause" onclick="document.getElementById('js-status-play-pause').className.includes('paused')?spotifyApi.play():spotifyApi.pause();" class="now-playing__status ${data.is_playing ? 'playing' : 'paused'}">${data.is_playing ? '&#9612;&#9612;' : '&#9654;'}</div>
-                <div id="skip-forward" class="skip-btn" onclick="spotifyApi.skipToNext()">&#9654;</div>
+                <div id="skip-back" class="skip-btn" >&#9664;</div>
+                <div id="js-status-play-pause"  class="now-playing__status ${data.is_playing ? 'playing' : 'paused'}">${data.is_playing ? '&#9612;&#9612;' : '&#9654;'}</div>
+                <div id="skip-forward" class="skip-btn" >&#9654;</div>
             </div>
             <div class="progress-container">
-                <div class="progress-time" onclick="spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms - 15000));">${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
+                <div class="progress-time" >${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
                     <div class="progress">
                         <div class="progress__bar" style="width:${data.progress_ms * 100 / data.item.duration_ms}%"></div>
                      </div>
-                <div class="progress-duration" onclick="spotifyApi.getMyCurrentPlaybackState().then(response => spotifyApi.seek(response.progress_ms + 15000));">${Math.floor((data.item.duration_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.item.duration_ms / 1000) % 60))}</div>
+                <div class="progress-duration" >${Math.floor((data.item.duration_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.item.duration_ms / 1000) % 60))}</div>
             </div>
             </div>
         </div>
@@ -106,6 +106,7 @@ function initAddElement(token) {
         spotifyPlayer.on('update', response => {
             if (response.item.album.images[0].url != lastImg) {
                 mainContainer.innerHTML = template(response);
+                setTimeout(initListeners, 200)
                 lastImg = response.item.album.images[0].url
             } else if (response.progress_ms != lastProgress) {
                 //update progress

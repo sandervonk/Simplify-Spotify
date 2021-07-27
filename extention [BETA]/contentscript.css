@@ -369,3 +369,10 @@ js-btn-login::after {
   content: "" !important;
   display: none !important;
 }
+.simplify-prevent-scroll.popup .simplify-container {
+  border-radius: 0px;
+  border: 4px white solid !important;
+}
+.popup .now-playing__img {
+  border-radius: 0px;
+}
