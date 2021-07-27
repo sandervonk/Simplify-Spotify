@@ -3,7 +3,7 @@ function pad2(number) {
     return (number < 10 ? '0' : '') + number
 
 }
-spotifyApi.setAccessToken(localStorage["simplify-token"])
+
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
@@ -11,11 +11,12 @@ var mainContainer = document.getElementById('js-main-container'),
 
 var spotifyPlayer = new SpotifyPlayer();
 var spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken(localStorage["simplify-token"])
 if (window.location.href.includes("#access_token=")) {
     token = window.location.href.split("#access_token=")[window.location.href.split("#access_token=").length - 1]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
-    console.log("now with token handling!")
+    console.log("now with ACTUAL token handling!")
 }
 
 var template = function (data) {
