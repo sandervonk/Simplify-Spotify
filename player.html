@@ -30,7 +30,10 @@
   <body>
     <div class="simplify-prevent-scroll">
       <div class="simplify-spotify">
-        <div class="simplify-spotify-minimize"></div>
+        <div
+          class="simplify-spotify-minimize"
+          onclick="element=document.getElementsByClassName('simplify-spotify')[0],element.className.includes(' minimized')?element.className=element.className.replace(' minimized',''):element.className+=' minimized';"
+        ></div>
         <div class="container">
           <div class="login-container hidden" id="js-login-container">
             <button class="btn btn--login" id="js-btn-login">
