@@ -303,6 +303,7 @@ body {
   font-family: "Open Sans", sans-serif;
   filter: drop-shadow(0 0 1px #000000aa);
   padding: 2px 5px;
+  cursor: pointer;
 }
 .progress-time:hover,
 .progress-duration:hover {
