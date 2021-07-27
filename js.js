@@ -84,6 +84,13 @@ spotifyPlayer.on('update', response => {
         lastStatus = response.is_playing
         console.log("different play state")
     }
+    document.getElementById('js-status-play-pause').addEventListener('click', () => {
+        if (document.getElementById('js-status-play-pause').className.includes("paused")) {
+            spotifyApi.play()
+        } else {
+            spotifyApi.pause()
+        }
+    })
 
 });
 
@@ -95,13 +102,7 @@ spotifyPlayer.on('login', user => {
         loginContainer.style.display = 'none';
         mainContainer.style.display = 'block';
     }
-    document.getElementById('js-status-play-pause').addEventListener('click', () => {
-        if (document.getElementById('js-status-play-pause').className.includes("paused")) {
-            spotifyApi.play()
-        } else {
-            spotifyApi.pause()
-        }
-    })
+
 });
 loginButton.addEventListener('click', () => {
     spotifyPlayer.login();
