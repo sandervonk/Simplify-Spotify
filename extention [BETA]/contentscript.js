@@ -53,9 +53,10 @@ chrome.storage.sync.get(["token_date", "token"], function (response) {
 
 
 function initAddElement(token) {
+
     document.body.innerHTML += `<div class=simplify-prevent-scroll><div class=simplify-spotify><div class=simplify-spotify-minimize onclick='element=document.getElementsByClassName("simplify-spotify")[0],element.className.includes(" minimized")?element.className=element.className.replace(" minimized",""):element.className+=" minimized"'>🗕︎</div><div class=simplify-container><div class="hidden login-container"id=js-login-container><button class="btn btn--login"id=js-btn-login>Login with Spotify</button></div><div class="hidden main-container"id=js-main-container></div></div></div></div>`
     setTimeout(function () {
-
+        spotifyPlayer.accessToken = token
         function pad2(number) {
             return (number < 10 ? '0' : '') + number
         }
