@@ -3,7 +3,7 @@ function pad2(number) {
     return (number < 10 ? '0' : '') + number
 
 }
-
+spotifyApi.setAccessToken(localStorage["simplify-token"])
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
