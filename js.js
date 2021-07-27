@@ -17,6 +17,8 @@ function pad2(number) {
 }
 //placeholder:
 needs_refresh = false
+/*
+*/
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
@@ -98,11 +100,14 @@ loginButton.addEventListener('click', () => {
     spotifyPlayer.login();
     window.location.href = requestURL
 });
-document.getElementById('js-status-play-pause').addEventListener('click', () => {
-    if (statusControl.className.includes("paused")) {
-        spotifyApi.play()
-    } else {
-        spotifyApi.pause()
-    }
-})
+setTimeout(function () {
+    document.getElementById('js-status-play-pause').addEventListener('click', () => {
+        if (document.getElementById('js-status-play-pause').className.includes("paused")) {
+            spotifyApi.play()
+        } else {
+            spotifyApi.pause()
+        }
+    })
+}, 300)
+
 spotifyPlayer.init();
