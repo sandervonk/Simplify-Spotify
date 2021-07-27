@@ -19,7 +19,6 @@ function pad2(number) {
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
-    statusControl = document.getElementById('js-status-play-pause'),
     background = document.getElementById('js-background');
 
 var spotifyPlayer = new SpotifyPlayer();
@@ -29,10 +28,10 @@ if (window.location.href.includes("#access_token=")) {
     token = window.location.href.split("#access_token=")[window.location.href.split("#access_token=").length - 1].split("&")[0]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
-}
+} else if (spotifyApi.getAccessToken())
 
-var template = function (data) {
-    return `
+    var template = function (data) {
+        return `
     <div class="main-wrapper">
     <img class="playlist-icon" src="img/playlist.svg">
       <div class="now-playing__img">
@@ -60,7 +59,7 @@ var template = function (data) {
     </div>
     <div class="background-parent"><div class="background" style="background-image:url(${data.item.album.images[0].url})"></div></div>
   `;
-};
+    };
 lastImg = ""
 lastProgress = 0
 lastStatus = false
@@ -96,8 +95,7 @@ loginButton.addEventListener('click', () => {
     spotifyPlayer.login();
     window.location.href = requestURL
 });
-
-statusControl.addEventListener('click', () => {
+document.getElementById('js-status-play-pause').addEventListener('click', () => {
     if (statusControl.className.includes("paused")) {
         spotifyApi.play()
     } else {
