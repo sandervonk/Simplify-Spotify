@@ -92,9 +92,11 @@ spotifyPlayer.on('update', response => {
     }
     if (!(response.is_playing === lastStatus)) {
         mainContainer.innerHTML = template(response);
-        document.getElementsByClassName("now-playing__status")[0].className = `now-playing__status ${response.is_playing ? 'playing' : 'paused'}`
-        document.getElementsByClassName("now-playing__status")[0].innerHTML = `${response.is_playing ? '&#9612;&#9612;' : '&#9654;'}`
-        lastStatus = response.is_playing
+        try {
+            document.getElementsByClassName("now-playing__status")[0].className = `now-playing__status ${response.is_playing ? 'playing' : 'paused'}`
+            document.getElementsByClassName("now-playing__status")[0].innerHTML = `${response.is_playing ? '&#9612;&#9612;' : '&#9654;'}`
+            lastStatus = response.is_playing
+        } catch { console.log("failed to get elements by classname") }
         console.log("different play state")
     }
 
