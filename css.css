@@ -349,7 +349,8 @@ body {
   bottom: 0;
   right: 0;
   position: absolute;
-  height: 240px;
-  width: 400px;
+  height: 260px;
+  width: 420px;
   overflow: hidden;
+  filter: drop-shadow(0 0 4px #000000aa);
 }
