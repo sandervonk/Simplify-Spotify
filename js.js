@@ -61,7 +61,7 @@ var template = function (data) {
       <div class="now-playing__controls">
         <div class="controls-center">
             <div id="skip-back" class="skip-btn" onclick="spotifyApi.skipToPrevious()">&#9664;</div>
-            <div id="js-status-play-pause" onclick="document.getElementById("js-status-play-pause").className.includes("paused")?spotifyApi.play():spotifyApi.pause();" class="now-playing__status ${data.is_playing ? 'playing' : 'paused'}">${data.is_playing ? '&#9612;&#9612;' : '&#9654;'}</div>
+            <div id="js-status-play-pause" onclick="document.getElementById('js-status-play-pause').className.includes('paused')?spotifyApi.play():spotifyApi.pause();' class='now-playing__status ${data.is_playing ? 'playing' : 'paused'}">${data.is_playing ? '&#9612;&#9612;' : '&#9654;'}</div>
             <div id="skip-forward" class="skip-btn" onclick="spotifyApi.skipToNext()">&#9654;</div>
         </div>
         <div class="progress-container">
