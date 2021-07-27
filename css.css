@@ -312,3 +312,44 @@ body {
   border-radius: 25px;
   filter: drop-shadow(0 0 3px #000000aa);
 }
+.simplify-spotify {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  height: 240px;
+  width: 400px;
+  transform: none;
+  transition: transform 0.5s ease-in-out;
+  overflow: hidden;
+  overflow: -moz-hidden-unscrollable;
+}
+.simplify-spotify.minimized {
+  transform: translateY(200px);
+  overflow: hidden;
+}
+.simplify-spotify-minimize {
+  width: 40px;
+  height: 40px;
+  bottom: 200px;
+  position: absolute;
+  background: white;
+  right: 180px;
+  border-radius: 25px 25px 0px 0px;
+  transition: background-position-y ease-in-out 0.7s;
+  background-position-y: 50px;
+}
+.minimized .simplify-spotify-minimize {
+  background-image: url(img/spotify.png);
+  background-repeat: no-repeat;
+  background-size: 40px;
+  background-position-x: center;
+  background-position-y: 0px;
+}
+.simplify-prevent-scroll {
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  height: 240px;
+  width: 400px;
+  overflow: hidden;
+}
