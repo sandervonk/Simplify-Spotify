@@ -310,4 +310,5 @@ body {
 .progress-duration:hover {
   background: rgba(211, 211, 211, 0.6);
   border-radius: 25px;
+  filter: drop-shadow(0 0 3px #000000aa);
 }
