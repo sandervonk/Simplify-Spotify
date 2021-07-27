@@ -335,8 +335,8 @@ body {
   background: white;
   right: 180px;
   border-radius: 25px 25px 0px 0px;
-  transition: background-position-y ease-in-out 0.6s;
-  background-position-y: 50px;
+  transition: background-position-y ease-in-out 0.7s;
+  background-position-y: 80px;
   cursor: pointer;
 }
 .minimized .simplify-spotify-minimize {
