@@ -15,7 +15,8 @@ function pad2(number) {
     return (number < 10 ? '0' : '') + number
 
 }
-
+//placeholder:
+needs_refresh = false
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
@@ -28,10 +29,12 @@ if (window.location.href.includes("#access_token=")) {
     token = window.location.href.split("#access_token=")[window.location.href.split("#access_token=").length - 1].split("&")[0]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
-} else if (spotifyApi.getAccessToken())
+} else if (spotifyApi.getAccessToken().length != 186 || needs_refresh) {
+    window.location.href = requestURL
+}
 
-    var template = function (data) {
-        return `
+var template = function (data) {
+    return `
     <div class="main-wrapper">
     <img class="playlist-icon" src="img/playlist.svg">
       <div class="now-playing__img">
@@ -59,7 +62,7 @@ if (window.location.href.includes("#access_token=")) {
     </div>
     <div class="background-parent"><div class="background" style="background-image:url(${data.item.album.images[0].url})"></div></div>
   `;
-    };
+};
 lastImg = ""
 lastProgress = 0
 lastStatus = false
