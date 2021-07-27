@@ -92,11 +92,11 @@ spotifyPlayer.on('login', user => {
         mainContainer.style.display = 'block';
     }
 });
-document.getElementById()
 loginButton.addEventListener('click', () => {
     spotifyPlayer.login();
     window.location.href = requestURL
 });
+
 statusControl.addEventListener('click', () => {
     if (statusControl.className.includes("paused")) {
         spotifyApi.play()
