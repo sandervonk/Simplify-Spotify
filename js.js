@@ -42,6 +42,7 @@ if (window.location.href.includes("#access_token=")) {
     spotifyApi.setAccessToken(token)
     localStorage["simplify-token-age"] = new Date();
     console.log("using new token")
+    window.location.href = window.location.href.split("#access_token=")[0]
 } else if ((String(new Date(localStorage["simplify-token-age"])) === "Invalid Date") || spotifyApi.getAccessToken().length != 186 || needs_refresh) {
     window.location.href = requestURL
     console.log("getting new token")
