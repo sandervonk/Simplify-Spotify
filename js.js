@@ -15,10 +15,18 @@ function pad2(number) {
     return (number < 10 ? '0' : '') + number
 
 }
-//placeholder:
-needs_refresh = false
-/*
-*/
+
+
+var createDate = new Date(localStorage["simplify-token-age"])
+var now = new Date();
+var seconds = (now.getTime() - createDate.getTime()) / 1000;
+//leave a little gap room so we arent using the same token till the last second
+if (seconds > 3000) {
+    needs_refresh = true
+} else {
+    needs_refresh = false
+}
+
 var mainContainer = document.getElementById('js-main-container'),
     loginContainer = document.getElementById('js-login-container'),
     loginButton = document.getElementById('js-btn-login'),
@@ -31,8 +39,11 @@ if (window.location.href.includes("#access_token=")) {
     token = window.location.href.split("#access_token=")[window.location.href.split("#access_token=").length - 1].split("&")[0]
     localStorage["simplify-token"] = token
     spotifyApi.setAccessToken(token)
+    localStorage["simplify-token-age"] = new Date();
+    console.log("using new token")
 } else if (spotifyApi.getAccessToken().length != 186 || needs_refresh) {
     window.location.href = requestURL
+    console.log("getting new token")
 }
 
 var template = function (data) {
