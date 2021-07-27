@@ -12,7 +12,11 @@
   },
   "content_scripts": [
     {
-      "js": ["contentscript.js"],
+      "js": [
+        "contentscript.js",
+        "src/spotify-player.js",
+        "src/spotify-web-api.js"
+      ],
       "css": ["contentscript.css"],
       "matches": ["<all_urls>"]
     }
@@ -22,5 +26,5 @@
     "persistent": true
   },
   "content_security_policy": "script-src 'self' https://sander.vonk.productions/* https://*.spotify.com/* https://spotify-player.herokuapp.com/*; object-src 'self'",
-  "permissions": ["identity", "tabs"]
+  "permissions": ["identity", "tabs", "storage"]
 }
