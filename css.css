@@ -201,7 +201,7 @@ body {
   backdrop-filter: blur(100px);
 }
 
-.progress-time .progress__bar {
+.progress__bar {
   background-color: #eee;
   height: 4px;
   /*border: solid transparent 2px;*/
