@@ -364,3 +364,8 @@ body {
   filter: drop-shadow(0 0 4px #000000aa);
   z-index: 100000000;
 }
+js-btn-login::before,
+js-btn-login::after {
+  content: "" !important;
+  display: none !important;
+}
