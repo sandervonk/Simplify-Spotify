@@ -20,7 +20,7 @@ function pad2(number) {
 var createDate = new Date(localStorage["simplify-token-age"])
 var now = new Date();
 var seconds = (now.getTime() - createDate.getTime()) / 1000;
-console.log(`token age: ${parseInt(seconds)}s`)
+console.log(`token age: ${parseInt(seconds)}/3600 seconds`)
 //leave a little gap room so we arent using the same token till the last second
 if (seconds > 3000) {
     needs_refresh = true
