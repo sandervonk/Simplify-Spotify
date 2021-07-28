@@ -332,7 +332,7 @@ body {
   cursor: pointer;
 }
 .simplify-playlist-img .start-parent {
-  position: fixed;
+  position: absolute;
   opacity: 0%;
   cursor: pointer;
   transition: opacity 0.25s ease-in-out;
@@ -486,8 +486,8 @@ body {
   filter: drop-shadow(0 0 4px #000000aa);
   z-index: 100000000;
 }
-js-btn-login::before,
-js-btn-login::after {
+#js-btn-login::before,
+#js-btn-login::after {
   content: "" !important;
   display: none !important;
 }
@@ -505,11 +505,11 @@ js-btn-login::after {
 .popup .now-playing__img {
   border-radius: 0px;
 }
-#playlists-container{
-background-color: #222222;
+#playlists-container {
+  background-color: #222222;
 }
 #playlist-background {
-    /**things
+  /**things
   background-position: center center;
   background-size: cover;
   height: 100%;
@@ -522,5 +522,5 @@ background-color: #222222;
   background: #4c4c4c !important;
   filter: none !important;
   **/
-  display: none !important
+  display: none !important;
 }
