@@ -277,7 +277,7 @@ body {
 }
 .playlists-container {
   display: none;
-  height: 192px;
+  height: 100%;
   width: 392px;
   padding: 10px 5px 10px 10px;
   overflow: auto;
@@ -357,8 +357,8 @@ body {
   overflow: hidden;
 }
 .playlist-description,
-.playlist-details * {
-  font-size: 10pt;
+.playlist-details {
+  font-size: 10pt !important;
   font-weight: 400;
 }
 .playlist-description {
@@ -466,6 +466,13 @@ js-btn-login::before,
 js-btn-login::after {
   content: "" !important;
   display: none !important;
+}
+.simplify-prevent-scroll.popup {
+  height: 100%;
+}
+.popup .simplify-spotify,
+.popup .simplify-container {
+  height: 100%;
 }
 .simplify-prevent-scroll.popup .simplify-container {
   border-radius: 0px;

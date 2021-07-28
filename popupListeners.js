@@ -1,7 +1,4 @@
 function initListeners() {
-    document.getElementsByClassName("simplify-spotify-minimize")[0].addEventListener("click", function () {
-        element = document.getElementsByClassName('simplify-spotify')[0], element.className.includes(' minimized') ? element.className = element.className.replace(' minimized', '') : element.className += ' minimized';
-    })
     document.getElementById("skip-back").addEventListener("click", function () {
         spotifyApi.skipToPrevious()
     })
@@ -21,6 +18,7 @@ function initListeners() {
         icon = document.getElementsByClassName("playlist-icon")[0]
         overlay = document.getElementsByClassName("playlists-container")[0]
         if (icon.className.includes("open-playlists")) {
+
             Promise.all([
                 spotifyApi.getFeaturedPlaylists(),
                 spotifyApi.getUserPlaylists(),
@@ -43,8 +41,8 @@ function initListeners() {
                         <div class="simplify-playlist-img"><img src="${playlist.images[0].url}"></div>
                         <div class="simplify-playlist-content">
                             <div class="playlist-title">${playlist.name}</div>
-                            <div class="playlist-description">"${playlist.description}"</div>
-                            <div class="playlist-details">${[playlist.owner.display_name, playlist.tracks.total].join(" &centerdot; ")}
+                            <div style="${playlist.description.length > 0 ? "" : "display: none"}" class="playlist-description">"${playlist.description}"</div>
+                            <div class="playlist-details">${[playlist.owner.display_name, (playlist.tracks.total + " tracks"), ((playlist.public > 0 ? "public" : "private") + (playlist.collaborative > 0 ? " (collab)" : ""))].join(" <b>&centerdot;</b> ")}
                             </div>
                         </div>
                     </div>`
@@ -60,11 +58,13 @@ function initListeners() {
                     return playlistElements
                 }
                 overlay.innerHTML = createPlaylists()
+                document.getElementsByTagName("html")[0].style = "width: 400px; height: 600px"
 
             });
         } else {
             //if playlists are open
             icon.className = "playlist-icon open-playlists"
+            document.getElementsByTagName("html")[0].style = "width: 400px; height: 200px"
             overlay.style.display = "none"
             icon.src = `data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDQ4LjEzOCA0NDguMTM4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NDguMTM4IDQ0OC4xMzg7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGQ9Ik00MzYuNzY4LDE1MS44NDVjLTEzLjE1Mi0yNi45NzYtMzUuNzQ0LTQyLjA4LTU3LjYtNTYuNzA0QzM2Mi44OCw4NC4yMjksMzQ3LjUyLDczLjkyNSwzMzYuNjQsNTkuMTczbC0yLjAxNi0yLjcyDQoJYy02LjQtOC42MDgtMTMuNjk2LTE4LjM2OC0xNC44MTYtMjYuNTZjLTEuMTItOC4yODgtNy42NDgtMTQuMDQ4LTE2LjkyOC0xMy43OTJDMjk0LjQ5NiwxNi42NzcsMjg4LDIzLjY1MywyODgsMzIuMDY5djI4NS4xMg0KCWMtMTMuNDA4LTguMTI4LTI5LjkyLTEzLjEyLTQ4LTEzLjEyYy00NC4wOTYsMC04MCwyOC43MDQtODAsNjRzMzUuOTA0LDY0LDgwLDY0YzQ0LjEyOCwwLDgwLTI4LjcwNCw4MC02NFYxODEuNTczDQoJYzI0LjAzMiw5LjE4NCw2My4zNiwzMi41NzYsNzQuMTc2LDg3LjJjLTIuMDE2LDIuOTc2LTMuOTM2LDYuMjA4LTYuMTc2LDguNzM2Yy01Ljg1Niw2LjYyNC01LjE4NCwxNi43MzYsMS40NCwyMi41Ng0KCWM2LjU5Miw1Ljg4OCwxNi43MDQsNS4xODQsMjIuNTYtMS40NGMyMC4wMzItMjIuNzUyLDMzLjgyNC01OC43ODQsMzUuOTY4LTk0LjAxNkM0NDkuMDI0LDE4Ny4yMzcsNDQ1LjE1MiwxNjguOTk3LDQzNi43NjgsMTUxLjg0NXoNCgkiLz4NCjxwYXRoIGQ9Ik0xNiw0OC4wNjloMTkyYzguODMyLDAsMTYtNy4xNjgsMTYtMTZzLTcuMTY4LTE2LTE2LTE2SDE2Yy04LjgzMiwwLTE2LDcuMTY4LTE2LDE2UzcuMTY4LDQ4LjA2OSwxNiw0OC4wNjl6Ii8+DQo8cGF0aCBkPSJNMTYsMTQ0LjA2OWgxOTJjOC44MzIsMCwxNi03LjE2OCwxNi0xNnMtNy4xNjgtMTYtMTYtMTZIMTZjLTguODMyLDAtMTYsNy4xNjgtMTYsMTZTNy4xNjgsMTQ0LjA2OSwxNiwxNDQuMDY5eiIvPg0KPHBhdGggZD0iTTExMiwyMDguMDY5SDE2Yy04LjgzMiwwLTE2LDcuMTY4LTE2LDE2czcuMTY4LDE2LDE2LDE2aDk2YzguODMyLDAsMTYtNy4xNjgsMTYtMTZTMTIwLjgzMiwyMDguMDY5LDExMiwyMDguMDY5eiIvPg0KPHBhdGggZD0iTTExMiwzMDQuMDY5SDE2Yy04LjgzMiwwLTE2LDcuMTY4LTE2LDE2czcuMTY4LDE2LDE2LDE2aDk2YzguODMyLDAsMTYtNy4xNjgsMTYtMTZTMTIwLjgzMiwzMDQuMDY5LDExMiwzMDQuMDY5eiIvPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=`
         }
