@@ -322,7 +322,7 @@ body {
   display: inline-flex;
   align-items: center;
 }
-.simplify-playlist:first-child {
+.simplify-playlist:nth-child(2) {
   margin-top: 0px;
 }
 .simplify-playlist-img img {
@@ -504,4 +504,23 @@ js-btn-login::after {
 }
 .popup .now-playing__img {
   border-radius: 0px;
+}
+#playlists-container{
+background-color: #222222;
+}
+#playlist-background {
+    /**things
+  background-position: center center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 5px;
+  z-index: -1;
+  filter: blur(10px) brightness(0.3);
+  background: #4c4c4c !important;
+  filter: none !important;
+  **/
+  display: none !important
 }

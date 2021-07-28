@@ -56,7 +56,7 @@ function initListeners() {
                 function createPlaylists() {
                     console.log("PLAYLISTS:")
                     console.log(playlistsList)
-                    var playlistElements = ""
+                    var playlistElements = `<div id="playlist-background" style="background-image: url(${lastImg})"></div>`
                     for (playlist of playlistsList) {
                         playlistElements += playlistTemplate(playlist)
                     }

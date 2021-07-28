@@ -1,5 +1,5 @@
 if (window.location.href.includes("?playlist:")) {
-    chrome.tabs.create({ "url": ("https://open.spotify.com/playlist/" + window.location.href.split("?playlist:")[1]) }, function () {
+    chrome.tabs.create({ "url": ("https://open.spotify.com/playlist/" + window.location.href.split("?playlist:")[1] + "?play-playlist"), "active": false }, function () {
         console.log("opened tab")
     })
 }
