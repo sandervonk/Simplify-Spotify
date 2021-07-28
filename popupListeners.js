@@ -38,7 +38,12 @@ function initListeners() {
                     console.log(playlist)
                     return `
                     <div class="simplify-playlist">
-                        <div class="simplify-playlist-img"><img src="${playlist.images[0].url}"></div>
+                        <div class="simplify-playlist-img">
+                            <img src="${playlist.images[0].url}">
+                            <div class="start-parent">
+                                <a href="${playlist.external_urls.spotify}"><div class="start-button">&#9654;</div></a>    
+                            </div>  
+                        </div>
                         <div class="simplify-playlist-content">
                             <div class="playlist-title">${playlist.name}</div>
                             <div style="${playlist.description.length > 0 ? "" : "display: none"}" class="playlist-description">"${playlist.description}"</div>

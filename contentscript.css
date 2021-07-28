@@ -329,6 +329,28 @@ body {
   height: 60px;
   width: 60px;
   border-radius: 10px;
+  cursor: pointer;
+}
+.simplify-playlist-img .start-parent {
+  position: fixed;
+  opacity: 0%;
+  cursor: pointer;
+  transition: opacity 0.25s ease-in-out;
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+  background: #00000066;
+}
+.simplify-playlist-img .start-parent .start-button {
+  line-height: 60px;
+  text-align: center;
+  font-size: 40px;
+  filter: drop-shadow(0 0 5px black);
+  color: white !important;
+  text-decoration: none !important;
+}
+.simplify-playlist-img .start-parent:hover {
+  opacity: 100%;
 }
 .simplify-playlist-img {
   align-items: center;
