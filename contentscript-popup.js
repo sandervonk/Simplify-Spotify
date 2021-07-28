@@ -4,7 +4,6 @@ if (window.location.href.includes("?playlist:")) {
     })
 }
 
-
 var spotifyApi;
 var spotifyPlayer;
 
