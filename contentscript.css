@@ -268,9 +268,24 @@ body {
   border: white solid 4px;
   border-width: 4px 0 0 4px;
 }
-
 .main-container {
+  overflow: hidden;
+}
+.main-container,
+.playlists-container {
   flex: 1;
+}
+.playlists-container {
+  display: none;
+  height: 192px;
+  width: 392px;
+  padding-right: 10px;
+  overflow: auto;
+  background: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 .playlist-icon {
   position: absolute;
@@ -279,6 +294,7 @@ body {
   width: 30px;
   filter: invert(1) drop-shadow(0 0 2px #00000044);
   cursor: pointer;
+  z-index: 10;
 }
 .playlist-icon:hover,
 .playlist-icon img:hover {

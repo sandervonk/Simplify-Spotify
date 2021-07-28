@@ -37,6 +37,9 @@ chrome.storage.sync.get({ "token_date": "", "token": "" }, function (response) {
         console.log("getting new token")
         chrome.runtime.sendMessage({ "action": 'run_auth_flow' });
         console.log("sent message")
+        setTimeout(function () {
+            window.location.reload()
+        }, 1000)
     }
     else {
         console.log("using current token:")
@@ -65,17 +68,17 @@ function initAddElement(token) {
         var mainContainer = document.getElementById('js-main-container'),
             loginContainer = document.getElementById('js-login-container'),
             loginButton = document.getElementById('js-btn-login'),
+            topContainer = document.getElementById('js-top-container'),
             background = document.getElementById('js-background');
 
         spotifyApi.setAccessToken(token)
-
+        //retain playlist or media icon for current page
 
         var template = function (data) {
             return `
         <div class="main-wrapper">
-        <img class="playlist-icon" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDQ4LjEzOCA0NDguMTM4IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA0NDguMTM4IDQ0OC4xMzg7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGQ9Ik00MzYuNzY4LDE1MS44NDVjLTEzLjE1Mi0yNi45NzYtMzUuNzQ0LTQyLjA4LTU3LjYtNTYuNzA0QzM2Mi44OCw4NC4yMjksMzQ3LjUyLDczLjkyNSwzMzYuNjQsNTkuMTczbC0yLjAxNi0yLjcyDQoJYy02LjQtOC42MDgtMTMuNjk2LTE4LjM2OC0xNC44MTYtMjYuNTZjLTEuMTItOC4yODgtNy42NDgtMTQuMDQ4LTE2LjkyOC0xMy43OTJDMjk0LjQ5NiwxNi42NzcsMjg4LDIzLjY1MywyODgsMzIuMDY5djI4NS4xMg0KCWMtMTMuNDA4LTguMTI4LTI5LjkyLTEzLjEyLTQ4LTEzLjEyYy00NC4wOTYsMC04MCwyOC43MDQtODAsNjRzMzUuOTA0LDY0LDgwLDY0YzQ0LjEyOCwwLDgwLTI4LjcwNCw4MC02NFYxODEuNTczDQoJYzI0LjAzMiw5LjE4NCw2My4zNiwzMi41NzYsNzQuMTc2LDg3LjJjLTIuMDE2LDIuOTc2LTMuOTM2LDYuMjA4LTYuMTc2LDguNzM2Yy01Ljg1Niw2LjYyNC01LjE4NCwxNi43MzYsMS40NCwyMi41Ng0KCWM2LjU5Miw1Ljg4OCwxNi43MDQsNS4xODQsMjIuNTYtMS40NGMyMC4wMzItMjIuNzUyLDMzLjgyNC01OC43ODQsMzUuOTY4LTk0LjAxNkM0NDkuMDI0LDE4Ny4yMzcsNDQ1LjE1MiwxNjguOTk3LDQzNi43NjgsMTUxLjg0NXoNCgkiLz4NCjxwYXRoIGQ9Ik0xNiw0OC4wNjloMTkyYzguODMyLDAsMTYtNy4xNjgsMTYtMTZzLTcuMTY4LTE2LTE2LTE2SDE2Yy04LjgzMiwwLTE2LDcuMTY4LTE2LDE2UzcuMTY4LDQ4LjA2OSwxNiw0OC4wNjl6Ii8+DQo8cGF0aCBkPSJNMTYsMTQ0LjA2OWgxOTJjOC44MzIsMCwxNi03LjE2OCwxNi0xNnMtNy4xNjgtMTYtMTYtMTZIMTZjLTguODMyLDAtMTYsNy4xNjgtMTYsMTZTNy4xNjgsMTQ0LjA2OSwxNiwxNDQuMDY5eiIvPg0KPHBhdGggZD0iTTExMiwyMDguMDY5SDE2Yy04LjgzMiwwLTE2LDcuMTY4LTE2LDE2czcuMTY4LDE2LDE2LDE2aDk2YzguODMyLDAsMTYtNy4xNjgsMTYtMTZTMTIwLjgzMiwyMDguMDY5LDExMiwyMDguMDY5eiIvPg0KPHBhdGggZD0iTTExMiwzMDQuMDY5SDE2Yy04LjgzMiwwLTE2LDcuMTY4LTE2LDE2czcuMTY4LDE2LDE2LDE2aDk2YzguODMyLDAsMTYtNy4xNjgsMTYtMTZTMTIwLjgzMiwzMDQuMDY5LDExMiwzMDQuMDY5eiIvPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=">
           <div class="now-playing__img">
-            <img src="${data.item.album.images[0].url}">
+            <img src="${currentImg}">
           </div>
           <div class="now-playing__side">
             <div class="now-playing__name">${data.item.name}</div>
@@ -97,17 +100,24 @@ function initAddElement(token) {
             </div>
         </div>
         </div>
-        <div class="background-parent"><div class="background" style="background-image:url(${data.item.album.images[0].url})"></div></div>
+        <div class="background-parent"><div class="background" style="background-image:url(${currentImg})"></div></div>
       `;
         };
         lastImg = ""
         lastProgress = 0
         lastStatus = false
         spotifyPlayer.on('update', response => {
-            if (response.item.album.images[0].url != lastImg) {
+            //fix for crash on custom songs:
+            try {
+                currentImg = response.item.album.images[0].url
+            } catch {
+                currentImg = "img/playlistNoImg.jpg"
+            }
+            if (currentImg != lastImg) {
+
                 mainContainer.innerHTML = template(response);
                 setTimeout(initListeners, 200)
-                lastImg = response.item.album.images[0].url
+                lastImg = currentImg
             } else if (response.progress_ms != lastProgress) {
                 //update progress
                 document.getElementsByClassName("progress__bar")[0].style.width = `${response.progress_ms * 100 / response.item.duration_ms}%`
@@ -129,10 +139,10 @@ function initAddElement(token) {
         spotifyPlayer.on('login', user => {
             if (user === null) {
                 loginContainer.style.display = 'block';
-                mainContainer.style.display = 'none';
+                topContainer.style.display = 'none';
             } else {
                 loginContainer.style.display = 'none';
-                mainContainer.style.display = 'block';
+                topContainer.style.display = 'block';
             }
 
         });
