@@ -100,7 +100,13 @@ function initAddElement(token) {
                 <div class="progress-time" >${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
                     <div class="progress">
                         <div class="progress__bar" style="width:${data.progress_ms * 100 / data.item.duration_ms}%"></div>
-                     </div>
+                        <div class="progress-markers">
+                            <div class="progress-marker pm1" id="js-seek-${parseInt((data.item.duration_ms / 5) * 1)}"></div>
+                            <div class="progress-marker pm2" id="js-seek-${parseInt((data.item.duration_ms / 5) * 2)}"></div>
+                            <div class="progress-marker pm3" id="js-seek-${parseInt((data.item.duration_ms / 5) * 3)}"></div>
+                            <div class="progress-marker pm4" id="js-seek-${parseInt((data.item.duration_ms / 5) * 4)}"></div>
+                        </div>
+                    </div>
                 <div class="progress-duration" >${Math.floor((data.item.duration_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.item.duration_ms / 1000) % 60))}</div>
             </div>
             </div>
@@ -166,3 +172,8 @@ function initAddElement(token) {
     //future ref:
     //document.body.outerHTML = document.body.outerHTML.split("</body>")[0] + `<div class=simplify-prevent-scroll><div class=simplify-spotify><div class=simplify-spotify-minimize onclick='element=document.getElementsByClassName("simplify-spotify")[0],element.className.includes(" minimized")?element.className=element.className.replace(" minimized",""):element.className+=" minimized"'>🗕︎</div><div class=container><div class="hidden login-container"id=js-login-container><button class="btn btn--login"id=js-btn-login>Login with Spotify</button></div><div class="hidden main-container"id=js-main-container></div></div></div></div>` + "</body>" + document.body.outerHTML.split("</body>")[1]
 }
+
+
+/*
+
+*/

@@ -196,7 +196,7 @@ body {
   margin-left: 5px;
   margin-right: 5px;
   border-radius: 50px;
-  overflow: hidden;
+  overflow: unset;
   padding: 2px;
   filter: drop-shadow(0 0 2px #00000044);
   backdrop-filter: blur(100px);
@@ -230,8 +230,8 @@ body {
 }
 .background-parent {
   position: absolute;
-  width: 400px;
-  height: 200px;
+  width: 392px;
+  height: 192px;
   top: 0;
   left: 0;
   overflow: hidden;
@@ -402,11 +402,28 @@ body {
   cursor: pointer;
   z-index: 10;
 }
+.devices-icon {
+  filter: invert(1) drop-shadow(0 0 2px #00000044);
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 30px;
+  filter: invert(1) drop-shadow(0 0 2px #00000044);
+  cursor: pointer;
+  z-index: 10;
+}
 .playlist-icon:hover,
+.devices-icon:hover,
+.devices-icon.close-devices,
 .playlist-icon img:hover {
-  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(170deg) saturate(400%)
+  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(72deg) saturate(400%)
     drop-shadow(0 0 2px #00000044);
 }
+
+
+
+
+
 .progress-time,
 .progress-duration {
   font-size: 8px;
@@ -505,11 +522,11 @@ body {
 .popup .now-playing__img {
   border-radius: 0px;
 }
-#playlists-container {
-  background-color: #222222;
+#playlists-container{
+background-color: #222222;
 }
 #playlist-background {
-  /**things
+    /**things
   background-position: center center;
   background-size: cover;
   height: 100%;
@@ -522,5 +539,71 @@ body {
   background: #4c4c4c !important;
   filter: none !important;
   **/
-  display: none !important;
+  display: none !important
+}
+.progress-markers {
+  width: 272px;
+  background: transparent;
+  position: absolute;
+  height: 4px;
+  top: 2px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.progress-markers .progress-marker {
+  display: inline-flex;
+  transform: scale(1);
+  transition: transform .25s ease-in-out, filter .25s ease-in-out;
+  background-color: grey;
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.progress-markers .progress-marker:hover {
+  transform: scale(4);
+  filter: drop-shadow(0 0 1px #000000aa);
+}
+.devices-container {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+  min-height: 50px;
+  height: fit-content;
+  width: 312px;
+  overflow: hidden;
+  background : #000000dd;
+  z-index: 10;
+  border-radius: 10px;
+  padding: 10px;
+}
+.devices-parent {
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow-y: scroll;
+  height: fit-content;
+  max-height: 100px;
+}
+
+.devices-container .devices-parent::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background: rgba(127, 127, 127, 0.6);
+}
+.devices-container .devices-parent::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+
+.spotify-device {
+display: flex;
+}
+.spotify-device > * {
+  display: inline-flex;
+}
+.device-icon {
+height: 30px;
+width: 30px;
+filter: invert(1);
 }
