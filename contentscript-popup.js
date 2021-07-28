@@ -1,3 +1,10 @@
+if (window.location.href.includes("?playlist:")) {
+    chrome.tabs.create({ "url": ("https://open.spotify.com/playlist/" + window.location.href.split("?playlist:")[1]) }, function () {
+        console.log("opened tab")
+    })
+}
+
+
 var spotifyApi;
 var spotifyPlayer;
 
