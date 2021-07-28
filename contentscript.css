@@ -341,13 +341,15 @@ body {
   border-radius: 10px;
   background: #00000066;
 }
+.start-parent a {
+  color: white !important;
+  text-decoration: none !important;
+}
 .simplify-playlist-img .start-parent .start-button {
   line-height: 60px;
   text-align: center;
   font-size: 40px;
   filter: drop-shadow(0 0 5px black);
-  color: white !important;
-  text-decoration: none !important;
 }
 .simplify-playlist-img .start-parent:hover {
   opacity: 100%;

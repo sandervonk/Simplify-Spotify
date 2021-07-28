@@ -41,7 +41,7 @@ function initListeners() {
                         <div class="simplify-playlist-img">
                             <img src="${playlist.images[0].url}">
                             <div class="start-parent">
-                                <a href="${playlist.external_urls.spotify}"><div class="start-button">&#9654;</div></a>    
+                                <a href="?${playlist.uri.replace('spotify:', '')}"><div class="start-button">&#9654;</div></a>    
                             </div>  
                         </div>
                         <div class="simplify-playlist-content">
