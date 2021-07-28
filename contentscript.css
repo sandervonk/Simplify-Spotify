@@ -279,13 +279,95 @@ body {
   display: none;
   height: 192px;
   width: 392px;
-  padding-right: 10px;
+  padding: 10px 5px 10px 10px;
   overflow: auto;
   background: black;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.playlists-container::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  background: rgba(127, 127, 127, 0.6);
+}
+.playlists-container::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+::-webkit-scrollbar-corner {
+  background: none;
+}
+::-webkit-scrollbar-track {
+  opacity: 0;
+}
+::-webkit-scrollbar-track {
+  opacity: 1 !important;
+  background-color: black;
+}
+.playlists-container .simplify-playlist:hover {
+  color: #ffffff;
+  background: #282828;
+}
+.playlists-container .simplify-playlist {
+  background: #181818;
+  color: #b3b2b1;
+  height: 70px;
+  width: 100%;
+  border-radius: 15px;
+}
+.simplify-playlist {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+}
+.simplify-playlist:first-child {
+  margin-top: 0px;
+}
+.simplify-playlist-img img {
+  height: 60px;
+  width: 60px;
+  border-radius: 10px;
+}
+.simplify-playlist-img {
+  align-items: center;
+  justify-items: flex-start;
+  display: inline-flex;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+.simplify-playlist-content {
+  display: flex;
+  flex-grow: 1;
+  flex-flow: column;
+  /*justify-content: flex-start;*/
+  justify-content: space-evenly;
+  align-content: flex-start;
+  align-content: space-between;
+  height: 60px;
+}
+.playlist-title {
+  font-size: 13pt;
+  font-family: "Montserrat Alternates";
+  font-weight: 600;
+  white-space: nowrap;
+  width: 280px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.playlist-description,
+.playlist-details * {
+  font-size: 10pt;
+  font-weight: 400;
+}
+.playlist-description {
+  font-style: italic;
+  color: #888;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 270px;
 }
 .playlist-icon {
   position: absolute;
