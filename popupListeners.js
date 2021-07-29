@@ -1,5 +1,6 @@
 var lastRan = -1
 var timeoutId = 0
+var simplifySetting = {}
 function initListeners() {
     //requisite for query limit
 
@@ -146,7 +147,18 @@ function initListeners() {
         }
     })
 
-
+    document.getElementsByClassName("settings-icon")[0].addEventListener("click", function () {
+        icon = document.getElementsByClassName("settings-icon")[0]
+        overlay = document.getElementsByClassName("settings-container")[0]
+        if (icon.className.includes("open-settings")) {
+            icon.className = "settings-icon close-settings"
+            overlay.style.display = "flex"
+        } else {
+            icon.className = "settings-icon open-settings"
+            overlay.style.display = "none"
+            //window.location.reload()
+        }
+    });
     document.getElementsByClassName("playlist-icon")[0].addEventListener("click", function () {
         icon = document.getElementsByClassName("playlist-icon")[0]
         overlay = document.getElementsByClassName("playlists-container")[0]
@@ -155,9 +167,17 @@ function initListeners() {
             Promise.all([
                 spotifyApi.getFeaturedPlaylists(),
                 spotifyApi.getUserPlaylists(),
+                spotifyApi.getPlaylist("37i9dQZEVXbMDoHDwVN2tF"),
+                spotifyApi.getPlaylist("37i9dQZF1DXcBWIGoYBM5M")
             ]).then(playlists => {
-                playlists.feature = playlists[0].items
+                playlists.feature = playlists[0].playlists.items
+                for (featurePlaylist of playlists.feature) {
+                    featurePlaylist.public = true
+                }
                 playlists.user = playlists[1].items
+                playlists.trending = [playlists[2], playlists[3]]
+                playlists.shift()
+                playlists.shift()
                 playlists.shift()
                 playlists.shift()
                 console.log(playlists)
@@ -166,6 +186,14 @@ function initListeners() {
                 //set icon
                 icon.src = `img/player.png`
                 icon.className = "playlist-icon close-playlists"
+                if (simplifySetting["setting-playlist-type"] === "user") {
+                    playlistsList = playlists.user
+                } else if (simplifySetting["setting-playlist-type"] === "trending") {
+                    playlistsList = playlists.trending
+                } else {
+                    playlistsList = playlists.feature
+                }
+
                 var playlistTemplate = function (playlist) {
                     console.log("playlistTemplate got playlist object:")
                     console.log(playlist)
@@ -185,7 +213,7 @@ function initListeners() {
                         </div>
                     </div>`
                 }
-                playlistsList = playlists.user
+
                 function createPlaylists() {
                     console.log("PLAYLISTS:")
                     console.log(playlistsList)
@@ -231,5 +259,73 @@ function initListeners() {
         spotifyApi.seek(document.getElementsByClassName("progress-marker pm4")[0].id.replace('js-seek-', '')).then(response => {
             console.log("seeked to", document.getElementsByClassName("progress-marker pm4")[0].id.replace('js-seek-', ''), "ms")
         })
+    })
+    //load settings
+    chrome.storage.sync.get({ "setting-filter": "none", "setting-playlist-type": "user", "setting-theme": "light" }, response => {
+        console.log("settings response:")
+        console.log(response)
+        simplifySetting = response
+        reloadSettings(simplifySetting)
+    })
+    function reloadSettings(simplifySetting) {
+        if (!(simplifySetting["setting-filter"] === "none")) {
+            document.getElementById("js-setting-filter").className += " active"
+            console.log("enabled filter icon")
+        } else {
+            document.getElementById("js-setting-filter").className = document.getElementById("js-setting-filter").className.replace(" active", "")
+            console.log("disabled filter icon")
+        }
+        playlistType = `js-setting-playlist-type-${simplifySetting["setting-playlist-type"]}`
+        theme = `js-setting-theme-${simplifySetting["setting-theme"]}`
+        //console.log(typeof (playlistType))
+        for (currentSetting of [playlistType, theme]) {
+            //console.log("setting:")
+            //console.log(currentSetting)
+            parentSelector = currentSetting.split("-")
+            //console.log("after split")
+            //console.log(parentSelector)
+            parentSelector.pop()
+            parentSelector = parentSelector.join("-")
+            parentObj = document.getElementById(parentSelector)
+            try {
+                for (settingChild of parentObj.children) {
+                    settingChild.className = settingChild.className.replace(" active", "")
+                }
+            } catch { }
+            document.getElementById(currentSetting).className += " active"
+            //console.log("parent selector:", parentSelector)
+        }
+        chrome.storage.sync.set(simplifySetting, function (response) {
+            console.log("set settings, settings:")
+            console.log(simplifySetting)
+        })
+        applySettings()
+    }
+    function applySettings() {
+        if (!(simplifySetting["setting-filter"] === "none")) {
+            document.body.className += " black-and-white"
+        } else {
+            document.body.className = document.body.className.replace(" black-and-white", "")
+        }
+    }
+    document.getElementById("js-setting-filter").addEventListener("click", function () {
+        if (document.getElementById("js-setting-filter").className.includes(" active")) {
+            simplifySetting["setting-filter"] = "none"
+        } else {
+            simplifySetting["setting-filter"] = "b&w"
+        }
+        reloadSettings(simplifySetting)
+    })
+    document.getElementById("js-setting-playlist-type-trending").addEventListener("click", function () {
+        simplifySetting["setting-playlist-type"] = "trending"
+        reloadSettings(simplifySetting)
+    })
+    document.getElementById("js-setting-playlist-type-user").addEventListener("click", function () {
+        simplifySetting["setting-playlist-type"] = "user"
+        reloadSettings(simplifySetting)
+    })
+    document.getElementById("js-setting-playlist-type-featured").addEventListener("click", function () {
+        simplifySetting["setting-playlist-type"] = "featured"
+        reloadSettings(simplifySetting)
     })
 }
