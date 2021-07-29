@@ -163,7 +163,7 @@ function initListeners() {
         icon = document.getElementsByClassName("playlist-icon")[0]
         overlay = document.getElementsByClassName("playlists-container")[0]
         if (icon.className.includes("open-playlists")) {
-
+            document.getElementsByTagName("html")[0].style = "width: 400px; height: 600px"
             Promise.all([
                 spotifyApi.getFeaturedPlaylists(),
                 spotifyApi.getUserPlaylists(),
@@ -224,7 +224,7 @@ function initListeners() {
                     return playlistElements
                 }
                 overlay.innerHTML = createPlaylists()
-                document.getElementsByTagName("html")[0].style = "width: 400px; height: 600px"
+
 
             });
         } else {
