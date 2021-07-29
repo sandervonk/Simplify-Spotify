@@ -30,9 +30,11 @@ function initListeners() {
                 for (device of response.devices) {
                     deviceInfo[device.name] = ({
                         "type": device.type.toLowerCase(),
-                        "name": device.name, "active": device.is_active,
+                        "name": device.name,
+                        "active": device.is_active,
                         "private": device.is_private_session,
-                        "volume": device.volume_percent
+                        "volume": device.volume_percent,
+                        "id": device.id
                     })
                 }
                 console.log(deviceInfo)
@@ -43,11 +45,37 @@ function initListeners() {
                         device.type = "browser"
                     }
                     deviceIcon = "img/devices/48/" + device.type + ".png"
-
+                    if (device.volume > 75) {
+                        speakerImg = "3"
+                    } else if (device.volume > 50) {
+                        speakerImg = "2"
+                    } else if (device.volume > 25) {
+                        speakerImg = "1"
+                    } else if (device.volume >= 1) {
+                        speakerImg = "0"
+                    } else {
+                        speakerImg = "Mute"
+                    }
+                    filter = (device.active ? "filter: brightness(4) sepia(1) hue-rotate(72deg) saturate(4000%) !important" : "")
+                    if (device.active) {
+                        filter = (device.type === "browser") ? "filter: brightness(175) sepia(1) hue-rotate(72deg) saturate(10000%) !important" : filter
+                    }
                     return `
                     <div class="spotify-device">
-                        <div class="device-icon" style="${device.active ? "filter: invert(1) brightness(0.49) sepia(1) hue-rotate(72deg) saturate(400%) !important" : ""}" title="${device.type.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}"><img src="${deviceIcon} "></div>
-                        <div></div>
+                        <div class="device-icon" style="${filter}" title="${device.type.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())}">
+                            <a href="?device:${device.id}"><img src="${deviceIcon}"></a>
+                        </div>
+                        <div class="device-volume" title="Volume: ${device.volume}%">
+                            <img src="img/speaker/speaker${speakerImg}.png">
+                            <div class="volume-parent">
+                                <div class="volume">
+                                    <div class="volume-bar" style="width: ${device.volume}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="device-name">
+                            <div class="name-child">${device.name}</div>
+                        </div>
                     </div>`
                 }
                 devicesElement = ""

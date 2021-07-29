@@ -582,7 +582,7 @@ background-color: #222222;
   position: relative;
   top: 0;
   left: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: fit-content;
   max-height: 100px;
 }
@@ -602,8 +602,71 @@ display: flex;
 .spotify-device > * {
   display: inline-flex;
 }
-.device-icon {
-height: 30px;
-width: 30px;
-filter: invert(1);
+.device-icon img {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  filter: invert(1);
 }
+.device-volume {
+  height: 30px;
+  /*width: 30px;*/
+  width: fit-content;
+  
+}
+.device-volume img {
+  filter: brightness(0) invert(1);
+  height: 20px;
+  width: 20px;
+  margin: 5px;
+}
+.device-volume div.volume {
+  height: 8px;
+  width: 0px;
+  transition: width .25s ease, border-color .25s ease, margin .25s ease;
+  display: block;
+  border-radius: 4px;
+  border: transparent 2px solid;
+  border: 2px solid;
+  border-color: transparent;
+}
+.volume-parent {
+  display: block !important;
+  height: fit-content;
+  align-self: center;
+  
+}
+.device-volume:hover div.volume {
+  width: 70px;
+  border-color: white;
+  margin: 0px 10px 0px 0px;
+}
+.volume-bar {
+  background: lightgrey;
+  height: 2px;
+  margin: 1px;
+  max-width: 64px;
+  border-radius: 1px;
+}
+
+.device-name {
+  align-self: center;
+  font-size: 15px;
+  font-family: 'Montserrat Alternates', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 70px;
+  flex-grow: 1;
+}
+.name-child {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+
+/*
+.device-volume:hover {
+  filter: brightness(3) sepia(1) hue-rotate(72deg) saturate(1000%);
+}
+*/

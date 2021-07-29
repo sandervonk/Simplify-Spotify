@@ -1,12 +1,21 @@
 if (window.location.href.includes("?playlist:")) {
     chrome.tabs.create({ "url": ("https://open.spotify.com/playlist/" + window.location.href.split("?playlist:")[1] + "?play-playlist"), "active": false }, function () {
         console.log("opened tab")
+        window.location.href = window.location.href.split["?"][0]
     })
 }
 
 var spotifyApi;
 var spotifyPlayer;
+if (window.location.href.includes("?device:")) {
+    setTimeout(function () {
+        var id = window.location.href.split("?device:")[1]
+        transferArray = [id]
+        console.log(transferArray)
+        spotifyApi.transferMyPlayback([id])
+    }, 1000)
 
+}
 function getScript(source, callback) {
     var script = document.createElement('script');
     var prior = document.getElementsByTagName('script')[0];
