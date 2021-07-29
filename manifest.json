@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Simplify Spotify",
+  "description": "Adds a small spotify player to all pages",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4ZluE3iii6ZYDnHjtXofd4bk1KUgiBwsWxPOnom/ZR7foUbm0i0qZY3QTG2FIeFfpdUXxqWiYm8r0pHUdKnwyEUfrdSTWnlJAYKXDYvzQA3g4MBbQ8heOuAoUuDf4AYrrF6xVyT3LrHH987C/YwBN+6jvEjFGLkqwFb7RIRlTdQgCvKL8t3cMybcEcaT1e0yOCySsBmqaDKao4OthGYqfA691qJ2LCIxX+NnvzBfArwbRZQzXgQxqdAwmyWuCNIB02j14XEXLfz78LloDu38ZwSwFrVEb/xrVrTLNLqZv3t4ISip7bgLtIaGUfP9VHkDN+ePtY3sEDkNYZ+7nFTG0QIDAQAB",
+  "version": "0.0.1",
+  "icons": {
+    "16": "icon/icon512.png",
+    "48": "icon/icon512.png",
+    "128": "icon/icon512.png",
+    "512": "icon/icon512.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": ["play-playlist.js"],
+      "matches": ["https://open.spotify.com/playlist/*"]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-inline' https://sander.vonk.productions/* https://*.spotify.com/* https://*.polyfill.io/* https://spotify-player.herokuapp.com/*; object-src 'self'",
+  "permissions": ["identity", "tabs", "storage"]
+}

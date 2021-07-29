@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="utf-8" />
+    <script src="src/spotify-web-api.js"></script>
+    <script src="src/spotify-player.js"></script>
+    <script src="contentscript-popup.js"></script>
+    <script src="src/polyfill.js"></script>
+    <script src="src/polyfill.min.js"></script>
+    <title>Spotify Player Test</title>
+    <meta name="description" content="test" />
+    <meta name="author" content="Sander Vonk" />
+
+    <link rel="stylesheet" href="contentscript.css" />
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body style="width: 400px; height: 200px">
+    <div class="simplify-prevent-scroll popup">
+      <div class="simplify-spotify">
+        <div class="simplify-container">
+          <div class="login-container hidden" id="js-login-container">
+            <button class="btn btn--login" id="js-btn-login">
+              Login with Spotify
+            </button>
+            <div class="login-text">Make sure you have something playing!</div>
+          </div>
+          <div class="top-container hidden" id="js-top-container">
+            <img
+              class="playlist-icon open-playlists"
+              title="Open Playlists Viewer"
+              src="img/playlists.png"
+            />
+            <img
+            class="devices-icon open-devices"
+            title="Open Devices Menu"
+            src="img/devices/16/other.png"
+          />
+          <img
+          class="settings-icon open-settings"
+          title="Open Settings Menu"
+          src="img/settings.png"
+        />
+            <div class="main-container" id="js-main-container"></div>
+            <div class="playlists-container" id="js-playlists-container"></div>
+            <div class="devices-container hidden" id="js-devices-container">
+              <div class="devices-parent"></div>
+            </div>
+            <div class="settings-container hidden" id="js-settings-container">
+              <div class="settings-highlight"></div>
+              <div class="settings-parent">
+                <div class="settings-element settings-filters">
+                  <div class="setting-description"><div class="description-text">Display filters</div></div>
+                  <div class="setting-options">
+                    <div class="setting-option" id="js-setting-filter" title="Black and White">
+                      <img alt="disabled" src="img/settings/color.png">
+                     <img alt="enabled" src="img/settings/b&w.png">
+                    </div>
+                </div>
+                </div>
+                <div class="settings-element settings-playlist-type">
+                    <div class="setting-description"><div class="description-text">Playlist type</div></div>
+                    <div class="setting-options" id="js-setting-playlist-type">
+                      <div class="setting-option" id="js-setting-playlist-type-trending" title="Trending Playlists"><img src="img/settings/trending.png"></div>
+                      <div class="setting-option" id="js-setting-playlist-type-user" title="User Playlists"><img src="img/settings/user-alt.png"></div>
+                      <div class="setting-option" id="js-setting-playlist-type-featured" title="Featured Playlists"><img src="img/settings/featured.png"></div>
+                    </div>
+                </div>
+                <div class="settings-element settings-dark-mode">
+                  <div class="setting-description"><div class="description-text">Theme</div></div>
+                  <div class="setting-options">
+                    <div class="setting-option" id="js-setting-theme-light" title="Light Mode"><img src="img/settings/light.png"></div>
+                    <div class="setting-option" id="js-setting-theme-dark" title="Dark Mode"><img src="img/settings/dark.png"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="popupListeners.js"></script>
+</html>

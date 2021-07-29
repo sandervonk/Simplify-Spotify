@@ -173,7 +173,7 @@ var SpotifyWebApi = (function () {
    * Creates an instance of the wrapper
    * @constructor
    */
-  var Constr = function () {};
+  var Constr = function () { };
 
   Constr.prototype = {
     constructor: SpotifyWebApi
@@ -1609,6 +1609,7 @@ var SpotifyWebApi = (function () {
   ) {
     var postData = options || {};
     postData.device_ids = deviceIds;
+    postData.play = true
     var requestData = {
       type: 'PUT',
       url: _baseUri + '/me/player',

@@ -23,30 +23,18 @@ class SpotifyPlayer {
   }
 
   init() {
-    this.fetchToken().then(r => r.json()).then(json => {
-      this.accessToken = json['access_token'];
-      this.expiresIn = json['expires_in'];
-      this._onNewAccessToken();
-    });
+    this.obtainingToken = true;
+    var tokenFromStorage;
+    chrome.storage.sync.get({ "token": "" }, function (response) {
+
+      tokenFromStorage = response;
+
+    })
+    this.accessToken = tokenFromStorage
+    this.obtainingToken = false;
+    this._onNewAccessToken();
   }
 
-  fetchToken() {
-    this.obtainingToken = true;
-    return fetch(`${this.exchangeHost}/token`, {
-      method: 'POST',
-      body: JSON.stringify({
-        refresh_token: localStorage.getItem('refreshToken')
-      }),
-      headers: new Headers({
-        'Content-Type': 'application/json'
-      })
-    }).then(response => {
-      this.obtainingToken = false;
-      return response;
-    }).catch(e => {
-      console.error(e);
-    });
-  }
 
   _onNewAccessToken() {
     if (this.accessToken === '') {
@@ -158,10 +146,7 @@ class SpotifyPlayer {
         console.error('Got error when fetching player', response);
         return null;
       } else {
-        //console.log(response)
-        try {
-          return response.json();
-        } catch { console.error("please make sure a song is playing") }
+        return response.json();
       }
     });
   }
