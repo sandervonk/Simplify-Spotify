@@ -881,3 +881,8 @@ display: flex;
   width: 30px;
   filter: invert(1) brightness(0.49) sepia(1) hue-rotate( 72deg) saturate(400%);
 }
+@media(min-height: 400px) {
+  .setting-options {
+    flex-flow: column;
+  }
+}
