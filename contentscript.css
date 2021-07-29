@@ -642,6 +642,7 @@ background-color: #222222;
   z-index: 10;
   border-radius: 10px;
   padding: 10px;
+  filter: drop-shadow(0 0 2px #ffffffaa);
 }
 .devices-parent {
   position: relative;
@@ -729,7 +730,17 @@ display: flex;
   overflow: hidden;
 }
 
-
+.volume {
+  display: inline-flex !important;
+  flex-wrap: nowrap;
+}
+.volume input[type="range"] {
+  position: relative;
+  top: 1px;
+}
+.volume-parent {
+  display: flex !important;
+}
 /*
 .device-volume:hover {
   filter: brightness(3) sepia(1) hue-rotate(72deg) saturate(1000%);
