@@ -20,6 +20,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             chrome.storage.sync.set({ "token": token, "token_date": String(createDate) }, function () {
                 console.log("value saved")
                 console.log({ "token": token, "token_date": String(createDate) })
+                sendResponse("did-oauth")
             });
         });
     }

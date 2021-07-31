@@ -50,11 +50,18 @@ chrome.storage.sync.get({ "token_date": "", "token": "" }, function (response) {
     }
     if (needNewToken || response.token.length != 186) {
         console.log("getting new token")
-        chrome.runtime.sendMessage({ "action": 'run_auth_flow' });
+        chrome.runtime.sendMessage({ "action": 'run_auth_flow' }, response => {
+            if (response === "did-oauth") {
+                console.log("OAuth Completed sucessfully")
+                window.location.reload()
+            } else {
+                console.log("Oauth did not reply properly")
+            }
+            console.log("OAuth message response:")
+            console.log(response)
+        });
         console.log("sent message")
-        setTimeout(function () {
-            window.location.reload()
-        }, 1000)
+
     }
     else {
         console.log("using current token:")
@@ -106,7 +113,7 @@ function initAddElement(token) {
                 <div id="skip-forward" class="skip-btn" >&#9654;</div>
             </div>
             <div class="progress-container">
-                <div class="progress-time" >${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
+                <div class="progress-time">${Math.floor((data.progress_ms / 1000 / 60) << 0) + ':' + pad2(Math.floor((data.progress_ms / 1000) % 60))}</div>
                     <div class="progress">
                         <div class="progress__bar" style="width:${data.progress_ms * 100 / data.item.duration_ms}%"></div>
                         <div class="progress-markers">

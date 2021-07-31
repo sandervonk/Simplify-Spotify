@@ -511,6 +511,7 @@ body {
   padding: 2px 5px;
   cursor: pointer;
   user-select: none;
+  width: fit-content;
 }
 .progress-time:hover,
 .progress-duration:hover {

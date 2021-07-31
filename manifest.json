@@ -24,6 +24,6 @@
       "matches": ["https://open.spotify.com/playlist/*"]
     }
   ],
-  "content_security_policy": "script-src 'self' 'unsafe-inline' https://sander.vonk.productions/* https://*.spotify.com/* https://*.polyfill.io/* https://spotify-player.herokuapp.com/*; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://sander.vonk.productions/* https://*.spotify.com/* https://*.polyfill.io/* https://spotify-player.herokuapp.com/*; object-src 'self'",
   "permissions": ["identity", "tabs", "storage"]
 }
