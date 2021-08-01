@@ -21,7 +21,7 @@ body.simplify {
   margin-right: 2px;
   border-radius: 2px;
   width: inherit;
-  transition: opacity .35s ease, max-width .35s ease;
+  transition: opacity 0.35s ease, max-width 0.35s ease;
 }
 .device-volume:hover #volSlider,
 .device-volume:hover .vol-slider {
@@ -29,7 +29,7 @@ body.simplify {
   opacity: 1;
 }
 
-input[type="range" i]  {
+input[type="range" i] {
   appearance: none;
   width: 8px; /* Set a specific slider handle width */
   height: 8px; /* Slider handle height */
@@ -37,19 +37,18 @@ input[type="range" i]  {
   cursor: pointer; /* Cursor on hover */
   border-radius: 4px;
 }
-input[type='range'] {
+input[type="range"] {
   width: 80px;
   -webkit-appearance: none;
   background-color: #9a905d;
 }
 
-input[type='range']::-webkit-slider-runnable-track {
+input[type="range"]::-webkit-slider-runnable-track {
   height: 10px;
   -webkit-appearance: none;
   color: #13bba4;
   margin-top: -1px;
 }
-
 
 .vol-slider::-webkit-slider-thumb {
   -webkit-appearance: none !important;
@@ -57,7 +56,7 @@ input[type='range']::-webkit-slider-runnable-track {
   width: 10px !important;
   height: 10px !important;
   border-radius: 6px !important;
-  background: #04AA6D !important;
+  background: #04aa6d !important;
   cursor: pointer;
 }
 
@@ -105,7 +104,6 @@ body {
   display: none;
 }
 
-
 .btn {
   background-color: transparent;
   border-radius: 2em;
@@ -136,7 +134,6 @@ body {
   filter: drop-shadow(0 0 2px #00000044);
   font-family: "Montserrat Alternates", sans-serif;
 }
-
 
 .now-playing__name {
   font-size: 20pt;
@@ -241,8 +238,6 @@ body {
   width: 45%;
 }
 
-
-
 .progress-container {
   margin-top: 10px;
   display: inline-flex;
@@ -270,7 +265,6 @@ body {
   min-width: 4px;
 }
 
-
 .background {
   width: 400px;
   height: 200px;
@@ -279,7 +273,7 @@ body {
   background-size: cover;
   background-position: center center;
   position: absolute;
-  filter: blur(20px) opacity(0.5);
+  filter: blur(20px) opacity(0.8);
 }
 .background.no-img,
 .no-img .background,
@@ -485,10 +479,6 @@ body {
     drop-shadow(0 0 2px #00000044);
 }
 
-
-
-
-
 .progress-time,
 .progress-duration {
   font-size: 8px;
@@ -588,10 +578,10 @@ body {
 .popup .now-playing__img {
   border-radius: 0px;
 }
-#playlists-container{
-background-color: #222222;
+#playlists-container {
+  background-color: #222222;
 }
-  /*things
+/*things
   background-position: center center;
   background-size: cover;
   height: 100%;
@@ -605,8 +595,7 @@ background-color: #222222;
   filter: none !important;
   */
 #playlist-background {
-
-  display: none !important
+  display: none !important;
 }
 .progress-markers {
   width: 272px;
@@ -621,7 +610,7 @@ background-color: #222222;
 .progress-markers .progress-marker {
   display: inline-flex;
   transform: scale(1);
-  transition: transform .25s ease-in-out, filter .25s ease-in-out;
+  transition: transform 0.25s ease-in-out, filter 0.25s ease-in-out;
   background-color: grey;
   width: 4px;
   height: 4px;
@@ -640,7 +629,7 @@ background-color: #222222;
   height: fit-content;
   width: 312px;
   overflow: hidden;
-  background : #000000dd;
+  background: #000000dd;
   z-index: 10;
   border-radius: 10px;
   padding: 10px;
@@ -665,7 +654,7 @@ background-color: #222222;
 }
 
 .spotify-device {
-display: flex;
+  display: flex;
 }
 .spotify-device > * {
   display: inline-flex;
@@ -680,7 +669,6 @@ display: flex;
   height: 30px;
   /*width: 30px;*/
   width: fit-content;
-  
 }
 .device-volume img {
   filter: brightness(0) invert(1);
@@ -691,7 +679,7 @@ display: flex;
 .device-volume div.volume {
   height: 8px;
   width: 0px;
-  transition: width .25s ease, border-color .25s ease, margin .25s ease;
+  transition: width 0.25s ease, border-color 0.25s ease, margin 0.25s ease;
   display: block;
   border-radius: 4px;
   border: transparent 2px solid;
@@ -702,7 +690,6 @@ display: flex;
   display: block !important;
   height: fit-content;
   align-self: center;
-  
 }
 .device-volume:hover div.volume {
   width: 70px;
@@ -720,7 +707,7 @@ display: flex;
 .device-name {
   align-self: center;
   font-size: 15px;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -764,7 +751,8 @@ display: flex;
   display: flex;
   flex-direction: column;
 }
-.settings-parent, .settings-highlight {
+.settings-parent,
+.settings-highlight {
   background: #000000dd;
 }
 .settings-highlight {
@@ -778,9 +766,8 @@ display: flex;
 }
 .settings-icon.close-settings {
   z-index: 100000;
-  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(
-    72deg
-    ) saturate(400%) drop-shadow(0 0 2px #00000044);
+  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(72deg) saturate(400%)
+    drop-shadow(0 0 2px #00000044);
 }
 .black-and-white {
   filter: saturate(0);
@@ -807,7 +794,7 @@ display: flex;
 .setting-description {
   float: left;
   font-size: 15px;
-  font-family: 'Montserrat Alternates', sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -829,7 +816,6 @@ display: flex;
   justify-content: space-around;
 }
 
-
 .setting-option img {
   height: 20px;
   width: 20px;
@@ -837,7 +823,7 @@ display: flex;
 }
 .setting-option[title="Black and White"] {
   transform: scale(1);
-  transition: transform .25s ease-in-out !important;
+  transition: transform 0.25s ease-in-out !important;
 }
 .setting-option[title="Black and White"]:not(.active):hover {
   transform: scale(1.5);
@@ -849,7 +835,7 @@ display: flex;
   display: unset;
 }
 .setting-option[title="Black and White"]:hover img[alt="disabled"],
-.setting-option[title="Black and White"].active img[alt="disabled"]{
+.setting-option[title="Black and White"].active img[alt="disabled"] {
   display: none !important;
 }
 .setting-option[title="Black and White"] img[alt="enabled"] {
@@ -864,10 +850,10 @@ display: flex;
   filter: invert(1);
   transform-origin: center center;
   transform: scale(1);
-  transition: transform .25s ease-in-out !important;
+  transition: transform 0.25s ease-in-out !important;
 }
 .setting-option:not(.active):hover img {
-  filter: invert(1) brightness(0.49) sepia(1) hue-rotate( 72deg) saturate(400%);
+  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(72deg) saturate(400%);
   transform: scale(1.5);
 }
 .setting-options {
@@ -880,10 +866,74 @@ display: flex;
 .setting-option.active img {
   height: 30px;
   width: 30px;
-  filter: invert(1) brightness(0.49) sepia(1) hue-rotate( 72deg) saturate(400%);
+  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(72deg) saturate(400%);
 }
-@media(min-height: 400px) {
+@media (min-height: 400px) {
   .setting-options {
     flex-flow: column;
   }
+}
+
+/**Unused**/
+.dark-mode .background {
+  filter: blur(20px) opacity(0.4);
+}
+.dark-mode .background-parent {
+  background-color: black;
+}
+
+.dark-mode .now-playing__img,
+.dark-mode .simplify-container {
+  border-color: black !important;
+}
+.dark-mode .now-playing__img {
+  filter: drop-shadow(0 0 2px #ffffffaa);
+}
+.dark-mode .now-playing__side > * {
+  color: black;
+  filter: drop-shadow(0 0 1px #aaaaaa);
+}
+.simplify-playlist.add-element {
+  margin-top: 10px !important;
+}
+.simplify-playlist.add-element ~ .simplify-playlist:first-child {
+  margin-top: 0px !important;
+}
+.simplify-playlist .simplify-playlist-img {
+  margin-right: 20px !important;
+}
+.simplify-playlist .simplify-playlist-img:hover {
+  background-color: #444 !important;
+}
+.simplify-playlist.add-element .simplify-playlist-img {
+  width: 60px;
+  height: 60px;
+  background: #212121;
+  border-radius: 15px;
+  text-align: center;
+  justify-content: center;
+  font-size: 50px;
+  user-select: none;
+  cursor: pointer;
+}
+#playlist-input {
+  align-self: center;
+  justify-self: end;
+  border-radius: 20px;
+  border: solid grey;
+  background: #333;
+  color: rgb(36, 206, 36);
+  padding: 5px;
+  line-height: 35px;
+  font-size: 15px;
+  height: 35px;
+  text-align: center;
+}
+.simplify-playlist.addPlaylistInputs .simplify-playlist {
+  margin: 0px !important;
+  position: relative !important;
+  left: -5px !important;
+  top: -5px !important;
+  width: 375px !important;
+  height: 68px !important;
 }
