@@ -973,7 +973,7 @@ body {
 .remove-custom {
   flex-shrink: 0;
   position: relative;
-  right: 20px;
+  right: 24px;
   width: 30px;
   display: block;
   height: 30px;
