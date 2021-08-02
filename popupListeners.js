@@ -37,20 +37,6 @@ var playlistTemplate = function (playlist, isCustom) {
 
 }
 
-function addEditBtn() {
-    let overlay_element = document.getElementsByClassName("playlists-container")[0]
-    overlay_element.innerHTML += `<div class="edit-btn-container"><div class="edit-btn"><img src="img/settings/edit.png" /></div></div>`
-    setTimeout(function () {
-        document.getElementsByClassName("edit-btn")[0].addEventListener("click", function () {
-            if (!document.getElementsByClassName("edit-btn")[0].className.includes(" edit")) {
-                document.getElementsByClassName("playlists-container")[0].className += " edit"
-            } else {
-                document.getElementsByClassName("playlists-container")[0].className = document.getElementsByClassName("playlists-container")[0].className.replace(" edit", "")
-            }
-            addRemoveListener()
-        })
-    }, 300)
-}
 function addRemoveListener() {
     setTimeout(function () {
         for (remove_btn of document.getElementsByClassName("remove-custom")) {
@@ -69,9 +55,6 @@ function addRemoveListener() {
         }
     }, 200)
 }
-
-
-
 function addCustomsListener() {
     setTimeout(function () {
         document.getElementById("addCustomButton").addEventListener("click", function () {
@@ -135,34 +118,6 @@ function addCustomsListener() {
         })
     }, 500)
 }
-
-
-function addNewCustomListener() {
-    setTimeout(function () {
-        let overlay_box = document.getElementsByClassName("playlists-container")[0]
-        let addBox = `
-        <div class="simplify-playlist addPlaylistInputs" style="display: block !important; height: fit-content;min-height: 30px;justify-content: space-between;padding: 0px;font-size: 20px;text-align: left;">
-            <div style="display: flex; padding: 10px;">
-                Playlist URI or Share link
-                <input type="text" id="playlist-input" style="" placeholder="spotify:playlist:id-here">
-            </div>
-            <div style="display: block; font-size: 10px; padding: 10px; padding-top: 0px; margin-top: 0px;"> 
-                Playlist Preview:
-                <div style="width: 100%;"></div>
-            </div>
-            <div id="playlist-preview" style="height: 70px; padding: 5px; width: 100%; border-radius: 15px; border: grey solid thin;"></div>
-        </div>
-        <div class="addCustomButton" id="addCustomButton" style="display: none;">+</div>
-        `
-        document.querySelector(".simplify-playlist.add-element .simplify-playlist-img").addEventListener("click", function () {
-            console.log("add playlist functionality goes here")
-            overlay_box.innerHTML += addBox
-            setTimeout(addCustomsListener, 500)
-        })
-    }, 500)
-
-}
-
 function initListeners() {
     //requisite for playlist formatter
 
@@ -248,9 +203,9 @@ function initListeners() {
 
 
     document.getElementsByClassName("devices-icon")[0].addEventListener("click", function () {
-        let icon = document.getElementsByClassName("devices-icon")[0]
-        let overlay = document.getElementsByClassName("devices-container")[0]
-        let parent = document.getElementsByClassName("devices-parent")[0]
+        icon = document.getElementsByClassName("devices-icon")[0]
+        overlay = document.getElementsByClassName("devices-container")[0]
+        parent = document.getElementsByClassName("devices-parent")[0]
         if (icon.className.includes("open-devices")) {
             icon.className = "devices-icon close-devices"
             overlay.style.display = "flex"
@@ -391,7 +346,20 @@ function initListeners() {
                     </div>
                 </div>`
 
-
+                let addBox = `
+                <div class="simplify-playlist addPlaylistInputs" style="display: block !important; height: fit-content;min-height: 30px;justify-content: space-between;padding: 0px;font-size: 20px;text-align: left;">
+                    <div style="display: flex; padding: 10px;">
+                        Playlist URI or Share link
+                        <input type="text" id="playlist-input" style="" placeholder="spotify:playlist:id-here">
+                    </div>
+                    <div style="display: block; font-size: 10px; padding: 10px; padding-top: 0px; margin-top: 0px;"> 
+                        Playlist Preview:
+                        <div style="width: 100%;"></div>
+                    </div>
+                    <div id="playlist-preview" style="height: 70px; padding: 5px; width: 100%; border-radius: 15px; border: grey solid thin;"></div>
+                </div>
+                <div class="addCustomButton" id="addCustomButton" style="display: none;">+</div>
+                `
 
                 if (custom_playlists.length === 1) {
                     console.log("one custom playlist")
@@ -419,14 +387,20 @@ function initListeners() {
                     }
                 }
                 overlay.innerHTML += addElement
+                setTimeout(function () {
+                    document.querySelector(".simplify-playlist.add-element .simplify-playlist-img").addEventListener("click", function () {
+                        console.log("add playlist functionality goes here")
+                        overlay.innerHTML += addBox
+                        addCustomsListener()
+                    })
+                }, 300)
+
                 overlay.style.display = "flex"
-                setTimeout(addEditBtn, 1000)
-                overlay.className = "playlists-container custom-container"
+                overlay.className = "playlists-container edit"
                 icon.src = `img/player.png`
                 icon.className = "playlist-icon close-playlists"
                 document.getElementsByTagName("html")[0].style = "width: 400px; height: 600px"
 
-                addNewCustomListener()
             }
 
         } else {
@@ -434,7 +408,6 @@ function initListeners() {
             icon.className = "playlist-icon open-playlists"
             document.getElementsByTagName("html")[0].style = "width: 400px; height: 200px"
             overlay.style.display = "none"
-            overlay.className = "playlists-container"
             icon.src = `img/playlists.png`
         }
     })
