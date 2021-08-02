@@ -208,7 +208,7 @@ function initListeners() {
         parent = document.getElementsByClassName("devices-parent")[0]
         if (icon.className.includes("open-devices")) {
             icon.className = "devices-icon close-devices"
-            overlay.style.display = "block"
+            overlay.style.display = "flex"
 
 
             spotifyApi.getMyDevices().then(response => {
@@ -326,7 +326,7 @@ function initListeners() {
                     }
                     //moved element show to creatPlaylists
                     overlay.innerHTML = createPlaylists(playlistsList)
-                    overlay.style.display = "block"
+                    overlay.style.display = "flex"
                     //set icon
                     icon.src = `img/player.png`
                     icon.className = "playlist-icon close-playlists"
@@ -392,7 +392,7 @@ function initListeners() {
                     overlay.innerHTML += addBox
                     addCustomsListener()
                 })
-                overlay.style.display = "block"
+                overlay.style.display = "flex"
                 icon.src = `img/player.png`
                 icon.className = "playlist-icon close-playlists"
                 document.getElementsByTagName("html")[0].style = "width: 400px; height: 600px"
