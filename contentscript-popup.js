@@ -7,6 +7,7 @@ if (window.location.href.includes("?playlist:")) {
         }, 3000)
     })
 }
+if (window.location.href.includes("?new-custom")) { setTimeout(function () { document.getElementsByClassName("playlist-icon open-playlists")[0].click() }, 1000) }
 
 var spotifyApi;
 var spotifyPlayer;

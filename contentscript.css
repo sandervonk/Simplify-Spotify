@@ -375,7 +375,7 @@ body {
   display: inline-flex;
   align-items: center;
 }
-.simplify-playlist:nth-child(2) {
+.simplify-playlist:nth-child(1) {
   margin-top: 0px;
 }
 .simplify-playlist-img img {
@@ -893,8 +893,8 @@ body {
   color: black;
   filter: drop-shadow(0 0 1px #aaaaaa);
 }
-.simplify-playlist.add-element {
-  margin-top: 10px !important;
+.simplify-playlist.add-element:first-child {
+  margin-top: 0px !important;
 }
 .simplify-playlist.add-element ~ .simplify-playlist:first-child {
   margin-top: 0px !important;
@@ -923,7 +923,7 @@ body {
   border: solid grey;
   background: #333;
   color: rgb(36, 206, 36);
-  padding: 5px;
+  padding: 5px 10px;
   line-height: 35px;
   font-size: 15px;
   height: 35px;
@@ -936,4 +936,80 @@ body {
   top: -5px !important;
   width: 375px !important;
   height: 68px !important;
+}
+.addCustomButton {
+  position: relative;
+  top: -36px;
+  left: 340px;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 15px;
+  background: #333;
+  color: #aaa;
+  font-size: 25px;
+  cursor: pointer;
+}
+.addCustomButton:hover {
+  background-color: #444;
+  color: #fff;
+  filter: drop-shadow(0 0 2px #ffffffaa);
+}
+.centered-info {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+  line-height: 58px;
+}
+#playlist-preview {
+  background: #256b25;
+}
+.remove-custom {
+  flex-shrink: 0;
+  position: relative;
+  right: 20px;
+  width: 30px;
+  display: block;
+  height: 30px;
+  bottom: -20px;
+  line-height: 25px;
+  text-align: center;
+  font-size: 30px;
+  border-radius: 15px 0px;
+  background: #222;
+  user-select: none;
+  cursor: pointer;
+}
+.simplify-playlist:hover .remove-custom {
+  background: #333;
+}
+.remove-custom:hover {
+  background: #555;
+  filter: drop-shadow(-2px -2px 2px #000000aa);
+}
+.alert-container {
+  align-self: start;
+  width: 392px;
+  height: 192px;
+  z-index: 99;
+  flex-flow: row;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.alert-container.show {
+  display: flex;
+  backdrop-filter: blur(4px);
+}
+.alert {
+  width: 250px;
+  height: 40px;
+  align-self: center;
+  border-radius: 25px;
+  background: #d3d3d3aa;
 }

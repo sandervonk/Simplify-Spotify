@@ -1,31 +1,126 @@
 var lastRan = -1
 var timeoutId = 0
 var simplifySetting = {}
-chrome.storage.sync.set({ "custom-playlists": ["37i9dQZEVXbMDoHDwVN2tF"], "settings-playlist-type": "user" }, function (response) {
-    console.log("set custom playlist, respones")
-    console.log(response)
-})
+function removeItemAll(arr, value) {
+    var i = 0;
+    while (i < arr.length) {
+        if (arr[i] === value) {
+            arr.splice(i, 1);
+        } else {
+            ++i;
+        }
+    }
+    return arr;
+}
+
+var playlistTemplate = function (playlist, isCustom) {
+    if (arguments.length != 2) {
+        isCustom = false
+    }
+    templateComplete = `
+    <div class="simplify-playlist" id="spotify-playlist-${playlist.id}">
+        <div class="simplify-playlist-img">
+            <img src="${playlist.images[0].url}">
+            <div class="start-parent">
+                <a href="?${playlist.uri.replace('spotify:', '')}"><div class="start-button">&#9654;</div></a>    
+            </div>  
+        </div>
+        <div class="simplify-playlist-content">
+            <div class="playlist-title">${playlist.name}</div>
+            <div style="${playlist.description.length > 0 ? "" : "display: none"}" class="playlist-description">"${playlist.description}"</div>
+            <div class="playlist-details">${[playlist.owner.display_name, (playlist.tracks.total + " tracks"), ((playlist.public > 0 ? "public" : "private") + (playlist.collaborative > 0 ? " (collab)" : ""))].join(" <b>&centerdot;</b> ")}
+            </div>
+        </div>
+        ${isCustom ? "<div class='remove-custom'>-</div>" : ""}
+    </div>`
+    return templateComplete
+
+}
+
+function addRemoveListener() {
+    setTimeout(function () {
+        for (remove_btn of document.getElementsByClassName("remove-custom")) {
+            let btn_parent = remove_btn.parentElement
+            let btn_playlist_id = btn_parent.id.replace("spotify-playlist-", '')
+            remove_btn.addEventListener("click", function () {
+                //to remove from display
+                btn_parent.remove()
+                //remove from variable
+                simplifySetting['custom-playlists'] = removeItemAll(simplifySetting['custom-playlists'], btn_playlist_id)
+                chrome.storage.sync.set(simplifySetting, function (response) {
+                    console.log("changed saved playlists to version with removed playlist:")
+                    console.log(simplifySetting["custom-playlists"])
+                })
+            })
+        }
+    }, 200)
+}
+function addCustomsListener() {
+    setTimeout(function () {
+        document.getElementById("addCustomButton").addEventListener("click", function () {
+            let playlist_input = document.getElementById("playlist-input").value
+            let playlistID = playlist_input.split("playlist:")[playlist_input.split("playlist:").length - 1]
+            playlistID = playlistID.split("/playlist/")[playlist_input.split("/playlist/").length - 1]
+            playlistID = playlistID.split("?")[0]
+            document.getElementById("playlist-input").value = ""
+            if (simplifySetting["custom-playlists"].indexOf(playlistID) === -1) {
+                simplifySetting["custom-playlists"].push(playlistID)
+                let customs = simplifySetting["custom-playlists"]
+                chrome.storage.sync.set(simplifySetting, function (reply) {
+                    console.log("saved playlists to storage")
+                    console.log("saved new custom with reply:")
+                    console.log(reply)
+                    console.log(customs)
+                    setTimeout(function () {
+                        window.location.href += "?new-custom"
+                    }, 100)
+                })
+            } else {
+                console.log("playlist already added")
+            }
+
+
+        })
+        document.getElementById("playlist-input").addEventListener("input", function () {
+            let addPlaylistInputs = document.getElementsByClassName("addPlaylistInputs")[0]
+            let playlist_input = document.getElementById("playlist-input").value
+            let playlistID = playlist_input.split("playlist:")[playlist_input.split("playlist:").length - 1]
+            playlistID = playlistID.split("/playlist/")[playlist_input.split("/playlist/").length - 1]
+            playlistID = playlistID.split("?")[0]
+            if (playlist_input.includes("/album/") || playlist_input.includes("album:")) {
+                document.getElementById("playlist-preview").innerHTML = `<div class="centered-info">Sorry, albums are not currently supported</div>`
+            } else if (playlist_input === "") {
+                document.getElementById("playlist-preview").innerHTML = `<div class="centered-info">Input is empty, try adding something!</div>`
+            } else {
+                if (simplifySetting["custom-playlists"].indexOf(playlistID) === -1) {
+                    spotifyApi.getPlaylist(playlistID).then(playlistData => {
+                        console.log("got playlist for preview:")
+                        console.log(playlistData)
+                        console.log("created and adding element:")
+                        let previewElement = playlistTemplate(playlistData)
+                        console.log(previewElement)
+                        document.getElementById("playlist-preview").innerHTML = previewElement
+                        document.getElementById("addCustomButton").style.display = "block"
+                    }).catch(error => {
+                        document.getElementById("playlist-preview").innerHTML = `<div class="centered-info">Sorry, that's not a valid playlist</div>`
+                        console.warn("Not a playlist, passed err", error)
+                        setTimeout(function () {
+                            document.getElementById("addCustomButton").style.display = "none"
+                        }, 100)
+
+                    })
+                } else {
+                    document.getElementById("playlist-preview").innerHTML = `<div class="centered-info"><b>Playlist Already Added</b></div>`
+                }
+            }
+
+
+        })
+    }, 500)
+}
 function initListeners() {
     //requisite for playlist formatter
-    var playlistTemplate = function (playlist) {
-        templateComplete = `
-        <div class="simplify-playlist">
-            <div class="simplify-playlist-img">
-                <img src="${playlist.images[0].url}">
-                <div class="start-parent">
-                    <a href="?${playlist.uri.replace('spotify:', '')}"><div class="start-button">&#9654;</div></a>    
-                </div>  
-            </div>
-            <div class="simplify-playlist-content">
-                <div class="playlist-title">${playlist.name}</div>
-                <div style="${playlist.description.length > 0 ? "" : "display: none"}" class="playlist-description">"${playlist.description}"</div>
-                <div class="playlist-details">${[playlist.owner.display_name, (playlist.tracks.total + " tracks"), ((playlist.public > 0 ? "public" : "private") + (playlist.collaborative > 0 ? " (collab)" : ""))].join(" <b>&centerdot;</b> ")}
-                </div>
-            </div>
-        </div>`
-        return templateComplete
 
-    }
 
     function createPlaylists(playlistsInput) {
         document.getElementsByTagName("html")[0].style = "width: 400px; height: 600px"
@@ -240,73 +335,8 @@ function initListeners() {
                 custom_playlists = simplifySetting["custom-playlists"]
                 icon = document.getElementsByClassName("playlist-icon")[0]
                 overlay = document.getElementsByClassName("playlists-container")[0]
-                /*
-                const createCustoms = new Promise((resolve, reject) => {
-                    try {
-                        //in, for function use, and out
-                        let I_playlistIDs = simplifySetting["custom-playlists"],
-                            F_playlistsArr = [],
-                            F_playlistID,
-                            O_reultHTML;
-                        if (I_playlistIDs.length > 1) {
-                            for (F_playlistID of I_playlistIDs) {
-                                spotifyApi.getPlaylist(F_playlistID, F_returnPlaylist => {
-                                    F_playlistsArr.push(F_returnPlaylist)
-                                });
-                            }
-                        } else if (I_playlistIDs.length = 1) {
-                            let F_playlistID = I_playlistIDs
-                            spotifyApi.getPlaylist(F_playlistID, F_returnPlaylist => {
-                                F_playlistsArr.push(F_returnPlaylist)
-                            });
-                        }
-                        console.log("Calling createPlaylists on:")
-                        console.log(F_playlistsArr)
-                        F_playlistsHTML = createPlaylists(F_playlistsArr)
-                        O_reultHTML = F_playlistsHTML
-                        console.log("Returning HTML:")
-                        console.log(O_resultHTML)
-                        resolve(O_resultHTML);
-                    } catch (error) {
-                        reject(error);
-                    }
-                });
-                
-                var templateCustoms = function (_customPlaylists) {
-                    if (_customPlaylists.length > 1) {
-                        let _playlistsComplete = ""
-                        for (_customId of _customPlaylists) {
-                            spotifyApi.getPlaylist(_customId).then(_customPlaylist => {
-                                console.log("custom playlist:")
-                                console.log(_customPlaylist)
-                                _playlistsComplete += playlistTemplate(_customPlaylist)
-                            })
-                        }
-                        return _playlistsComplete
-                    } else if (_customPlaylists.length === 1) {
-            
-                        spotifyApi.getPlaylist(_customPlaylists).then(_customPlaylist => {
-                            console.log("custom playlist:")
-                            console.log(_customPlaylist)
-                            _returned = playlistTemplate(_customPlaylist)
-                            console.log("returning:")
-                            console.log(_returned)
-                            overlay.innerHTML = _returned
-                        })
-                    } else {
-                        console.log("no playlists")
-                        return ""
-                    }
-                }
-
-                //_customContent = templateCustoms(custom_playlists)
-                // console.log("actually setting to:")
-                //console.log(_customContent)
-                //overlay.innerHTML = templateCustoms(custom_playlists)
-                */
                 custom_playlists = simplifySetting["custom-playlists"]
-                icon = document.getElementsByClassName("playlist-icon")[0]
-                overlay = document.getElementsByClassName("playlists-container")[0]
+                overlay.innerHTML = ""
                 console.error("Sorry, custom playlists are not yet fully supported :(, please select another source")
                 let addElement = `
                 <div class="simplify-playlist add-element">
@@ -328,49 +358,40 @@ function initListeners() {
                     </div>
                     <div id="playlist-preview" style="height: 70px; padding: 5px; width: 100%; border-radius: 15px; border: grey solid thin;"></div>
                 </div>
+                <div class="addCustomButton" id="addCustomButton" style="display: none;">+</div>
                 `
 
                 if (custom_playlists.length === 1) {
+                    console.log("one custom playlist")
                     spotifyApi.getPlaylist(custom_playlists).then(playlistInfo => {
                         console.log(`got playlist by id ${custom_playlists}:`)
                         console.log(playlistInfo)
-                        playlistText = playlistTemplate(playlistInfo)
+                        playlistText = playlistTemplate(playlistInfo, true)
                         let playlistElement = document.createRange().createContextualFragment(playlistText)
                         overlay.appendChild(playlistElement)
-                        overlay.innerHTML += addElement
-                        document.querySelector(".simplify-playlist.add-element .simplify-playlist-img").addEventListener("click", function () {
-                            console.log("add playlist functionality goes here")
-                            overlay.innerHTML += addBox
-                            setTimeout(function () {
-
-                                document.getElementById("playlist-input").addEventListener("input", function () {
-                                    let addPlaylistInputs = document.getElementsByClassName("addPlaylistInputs")[0]
-                                    let playlistID = document.getElementById("playlist-input").value.split("playlist:")[document.getElementById("playlist-input").value.split("playlist:").length - 1]
-                                    spotifyApi.getPlaylist(playlistID).then(playlistData => {
-                                        let previewElement = playlistTemplate(playlistData)
-                                        document.getElementById("playlist-preview").innerHTML = previewElement
-                                    }).catch(error => {
-                                        document.getElementById("playlist-preview").innerHTML = "Not a playlist :("
-                                        console.warn("Not a playlist, passed err", error)
-                                    })
-                                })
-                            }, 500)
-                        })
                     })
                 } else if (custom_playlists.length === 0) {
                     console.log("no custom playlists")
                 } else {
+                    console.log("multiple playlists")
                     for (customID of custom_playlists) {
                         spotifyApi.getPlaylist(customID).then(playlistInfo => {
                             console.log(`got playlist by id ${customID}:`)
                             console.log(playlistInfo)
-                            playlistText = playlistTemplate(playlistInfo)
+                            playlistText = playlistTemplate(playlistInfo, true)
                             let playlistElement = document.createRange().createContextualFragment(playlistText)
                             overlay.appendChild(playlistElement)
+                            addRemoveListener()
                         })
 
                     }
                 }
+                overlay.innerHTML += addElement
+                document.querySelector(".simplify-playlist.add-element .simplify-playlist-img").addEventListener("click", function () {
+                    console.log("add playlist functionality goes here")
+                    overlay.innerHTML += addBox
+                    addCustomsListener()
+                })
                 overlay.style.display = "block"
                 icon.src = `img/player.png`
                 icon.className = "playlist-icon close-playlists"
