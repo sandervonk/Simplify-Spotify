@@ -53,7 +53,7 @@ function addRemoveListener() {
                 })
             })
         }
-    }, 200)
+    }, 300)
 }
 function addCustomsListener() {
     setTimeout(function () {
@@ -80,7 +80,7 @@ function addCustomsListener() {
             }
 
 
-        })
+        }, 200)
         document.getElementById("playlist-input").addEventListener("input", function () {
             let addPlaylistInputs = document.getElementsByClassName("addPlaylistInputs")[0]
             let playlist_input = document.getElementById("playlist-input").value
@@ -369,6 +369,7 @@ function initListeners() {
                         playlistText = playlistTemplate(playlistInfo, true)
                         let playlistElement = document.createRange().createContextualFragment(playlistText)
                         overlay.appendChild(playlistElement)
+                        addRemoveListener()
                     })
                 } else if (custom_playlists.length === 0) {
                     console.log("no custom playlists")

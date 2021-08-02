@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Simplify Spotify",
-  "description": "Adds a small spotify player to all pages",
+  "description": "Simple Spotify controls + playlist loader right on your extentions bar!",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4ZluE3iii6ZYDnHjtXofd4bk1KUgiBwsWxPOnom/ZR7foUbm0i0qZY3QTG2FIeFfpdUXxqWiYm8r0pHUdKnwyEUfrdSTWnlJAYKXDYvzQA3g4MBbQ8heOuAoUuDf4AYrrF6xVyT3LrHH987C/YwBN+6jvEjFGLkqwFb7RIRlTdQgCvKL8t3cMybcEcaT1e0yOCySsBmqaDKao4OthGYqfA691qJ2LCIxX+NnvzBfArwbRZQzXgQxqdAwmyWuCNIB02j14XEXLfz78LloDu38ZwSwFrVEb/xrVrTLNLqZv3t4ISip7bgLtIaGUfP9VHkDN+ePtY3sEDkNYZ+7nFTG0QIDAQAB",
-  "version": "0.0.1",
+  "version": "0.6.4",
   "icons": {
     "16": "icon/icon512.png",
     "48": "icon/icon512.png",
