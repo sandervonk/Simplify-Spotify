@@ -936,7 +936,7 @@ body {
   position: relative !important;
   left: -5px !important;
   top: -5px !important;
-  width: 375px !important;
+  width: 370px !important;
   height: 68px !important;
 }
 .addCustomButton {
@@ -1037,6 +1037,8 @@ body {
   flex-grow: 1;
   justify-content: space-around;
   display: flex;
+  flex-basis: 90px;
+  flex-shrink: 0;
 }
 .edit-btn {
   width: 70px;
@@ -1044,7 +1046,25 @@ body {
   border-radius: 15px;
   background: #181818;
   align-self: center;
+  width: fit-content;
 }
 .edit-btn:hover {
   background: #282828;
+}
+.edit-btn img {
+  filter: invert(1);
+  padding: 15px;
+  width: 70px;
+  height: 70px;
+  transform: scale(1);
+  transition: 0.25s ease-in-out transform, 0.25s ease-in-out filter;
+}
+.edit .edit-btn img,
+.edit-btn:hover img {
+  transform: scale(1.3);
+  filter: invert(1) brightness(0.49) sepia(1) hue-rotate(72deg) saturate(400%)
+    drop-shadow(0 0 2px #00000044);
+}
+.playlists-container:not(.custom-container) .edit-btn-container {
+  display: none !important;
 }
