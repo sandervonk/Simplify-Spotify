@@ -6,7 +6,7 @@ Heavily in-progress Spotify player for any site, based on the amazing codebase b
 - [ ] Next, find the switch labeled _**`Developer mode`**_ and make sure it is on
 - [ ] Click _**`Load Unpacked`**_ and select the folder named 'Simplify Spotify' that the .zip extracted into
 - [ ] Finally, just press 'Select Folder' or the equivalent button for opening the folder in your browser
-- [ ] [ ] Simplify Spotify should now be installed!! Try clicking the icon in your extentions drawer to open it!
+- [ ] Simplify Spotify should now be installed!! Try clicking the icon in your extentions drawer to open it!
 - [ ] If you have any problems, please contact me, oh and to customize settings and access the 'quick-check' features, click the extention's icon in your extentions tray
 Find a tad more description on [my projects site](https://sander.vonk.productions/Projects.html)
 # Basic interface features
