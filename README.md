@@ -8,12 +8,12 @@ Heavily in-progress Spotify player for any site, based on the amazing codebase b
 - [ ]  Finally, just press 'Select Folder' or the equivalent button for opening the folder in your browser
 - [ ]  Simplify Spotify should now be installed!! Try clicking the icon in your extentions drawer to open it!
 - [ ]  If you have any problems, please contact me, oh and to customize settings and access the 'quick-check' features, click the extention's icon in your extentions tray
-Find a tad more description on [my projects site](https://sander.vonk.productions/Projects.html)
+Find a tad more description on [my projects site](https://sander.vonk.one/Projects.html)
 # Basic interface features
 <p>
-<img width="49%" src="https://sander.vonk.productions/simplify-spotify/img/tutorial/1tutorial-interface.jpg">
-<img width="49%" src="https://sander.vonk.productions/simplify-spotify/img/tutorial/2tutorial-playlists.jpg">
-<img width="49%" src="https://sander.vonk.productions/simplify-spotify/img/tutorial/3tutorial-devices.jpg">
-<img width="49%" src="https://sander.vonk.productions/simplify-spotify/img/tutorial/4tutorial-devices-volume.jpg">
-<img width="49%" src="https://sander.vonk.productions/simplify-spotify/img/tutorial/5tutorial-settings.jpg">
+<img width="49%" src="https://sander.vonk.one/simplify-spotify/img/tutorial/1tutorial-interface.jpg">
+<img width="49%" src="https://sander.vonk.one/simplify-spotify/img/tutorial/2tutorial-playlists.jpg">
+<img width="49%" src="https://sander.vonk.one/simplify-spotify/img/tutorial/3tutorial-devices.jpg">
+<img width="49%" src="https://sander.vonk.one/simplify-spotify/img/tutorial/4tutorial-devices-volume.jpg">
+<img width="49%" src="https://sander.vonk.one/simplify-spotify/img/tutorial/5tutorial-settings.jpg">
 </p>
